@@ -1,0 +1,84 @@
+//
+// Mixins
+//
+
+//clearfix
+.clear() {
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+	*zoom: 1;
+}
+
+//absolute vertical and horizontal centering
+//parent must have position relative or absolute
+//requires declared height
+.absCenter() {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+//placeholder multidefinition
+.placeholder(@ffamily: Arial; @fsize: 16px; @fweight: normal; @col: black) {
+	::-webkit-input-placeholder {
+		font-family: @ffamily;
+		font-size: @fsize;
+		font-weight: @fweight;
+		color: @col;
+	}		
+	:-moz-placeholder {
+		font-family: @ffamily;
+		font-size: @fsize;
+		font-weight: @fweight;
+		color: @col;
+
+	}		
+	::-moz-placeholder {
+		font-family: @ffamily;
+		font-size: @fsize;
+		font-weight: @fweight;
+		color: @col;
+	}
+	:-ms-input-placeholder {  
+		font-family: @ffamily;
+		font-size: @fsize;
+		font-weight: @fweight;
+		color: @col;
+	}
+}
+
+//absolute position
+.abs(@top: 0; @left: 0) {
+	position: absolute;
+	top: @top;
+	left: @left;
+}
+
+//relative position
+.rel(@top: 0; @left: 0) {
+	position: relative;
+	top: @top;
+	left: @left;
+}
+
+//hidden element
+.hidden() {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+
+//vertically centered text
+.verticalText(@height; @subset: 0) {
+	height: @height;
+	line-height: (@height - @subset);
+}
