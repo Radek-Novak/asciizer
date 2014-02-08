@@ -94,7 +94,7 @@ var cw = canvas.width,
 	sum = 0,
 	range = null,
 	step = null,
-	chars = " .:-=+*#%@".split("").reverse().join("");
+	chars = " .-:*+=%#@".split("").reverse().join("");
 
 function sum_4 (arr) {
 	var sum = 0,
