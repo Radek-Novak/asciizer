@@ -1,7 +1,7 @@
 $('header input.preview').on("click", function () {
 	if (!$(this).is(':checked')) {
-		$('canvas').hide();
+		$('canvas').hide(200);
 	} else {
-		$('canvas').show();
+		$('canvas').show(300);
 	}
 });

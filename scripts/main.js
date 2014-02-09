@@ -1,4 +1,6 @@
-var cw = canvas.width,
+var canvas = document.getElementsByTagName('canvas')[0],
+	context = canvas.getContext('2d'),
+	cw = canvas.width,
 	ch = canvas.height,
 	charw = 3,
 	charh = 5,
@@ -76,7 +78,7 @@ function getValues () {
 function printValues() {
 	var text = '';
 
-	document.getElementById('out').innerHTML = text;
+	$('output pre').text(text);
 
 	for ( var i = 0; i < gridHeight; i++ ) {
 		for ( var j = 0; j < gridWidth; j++ ) {
@@ -103,10 +105,10 @@ function printValues() {
 				console.log(e);
 			}
 		}
-		text += "<br>";
+		text += "\n";
 	}
 
-	document.getElementById('out').innerHTML = text;
+	$('output pre').text(text);
 }
 
 function paintGrid(ctx) {
