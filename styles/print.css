@@ -12,3 +12,7 @@ footer,
 nav {
   display: none;
 }
+header,
+canvas {
+  display: none;
+}

@@ -153,38 +153,55 @@ em {
 a {
   color: inherit;
 }
+html {
+  height: 100%;
+  font-family: Fixedsys, Courier, Arial, sans-serif;
+}
 body {
-  margin: 0;
-  padding: 0;
+  position: relative;
+  min-height: 100%;
+  min-width: 100%;
 }
-* {
-  font-family: Tahoma, Verdana, sans-serif;
+body header {
+  font-size: 13px;
 }
-canvas {
-  border: 1px solid cyan;
-  float: left;
-  display: inline-block;
+body main canvas {
+  display: none;
+  margin: 0 auto;
 }
-#dropzone {
+body main output {
+  width: 1000px;
+  height: 1000px;
+  display: block;
+  border: 1px solid #eee;
+  font-family: Courier, sans-serif;
+  font-size: 12px;
+  line-height: 13px;
+}
+body .dropBox {
   position: absolute;
-  width: 90%;
-  height: 90%;
-  z-index: 10;
-  border: 3px dashed gray;
-  text-align: center;
-  background: white;
-  opacity: 0.5;
-  margin: auto;
-  bottom: 0;
   top: 0;
   left: 0;
   right: 0;
-}
-#out {
-  position: absolute;
   bottom: 0;
+  margin: auto;
+  width: 80%;
+  height: 80%;
+  color: white;
+  z-index: -1;
+  border-radius: 100%;
+  text-align: center;
+  background: blue;
+  display: none;
+}
+body .dropBox .dropMessage {
+  position: absolute;
+  top: 0;
+  left: 0;
   right: 0;
-  border: 1px solid #eee;
-  font-family: Courier, sans-serif;
-  font-size: 1.2em;
+  bottom: 0;
+  margin: auto;
+  text-shadow: #000000 0px -4px, #000000 0px 4px, #000000 -4px 0px, #000000 4px 0px;
+  height: 50px;
+  font-size: 40px;
 }

@@ -1,75 +1,70 @@
 var DropHandler = {
-	dropzone: null,
+	$dropzone: null,
+	$dropMessage: null,
+	$dropBox: null,
 	dropped: false,
 
 	init: function () {
-		var that = this;
-		this.dropzone = document.getElementById("dropzone");
+		this.$dropzone = $('html');
+		this.$dropMessage = $('.dropMessage');
+		this.$dropBox = $('.dropBox');
 
-		this.dropzone.addEventListener('dragenter', function(e) {that.dragenter(e);}, false);
-		//this.dropzone.addEventListener('dragover', function(e) {that.dragover(e);}, false);
-
-		this.dragover = this.dragover.bind(this);
-		this.dropzone.addEventListener('dragover', this.dragover, false);
-
-		(function (self) {
-			self.dropzone.addEventListener('drop', function(e) {self.drop(e);}, false);
-		})(this);
-
-		(function (self) {
-			self.dropzone.addEventListener('dragleave', function(e) {self.dragleave(e);}, false);
-		})(this);
-
+		this.$dropzone.on('dragenter', this.dragenter.bind(this));
+		this.$dropzone.on('dragover', this.dragover.bind(this));
+		this.$dropzone.on('drop', this.drop.bind(this));
+		this.$dropzone.on('dragleave', this.dragleave.bind(this));
 	},
 
 	dragenter: function (e) {
 		e.stopPropagation();
 		e.preventDefault();
-		//console.log(this);
-		this.dropzone.style.opacity = 0.5;
 	},
 	dragover: function (e) {
 		e.stopPropagation();
 		e.preventDefault();
-		this.dropzone.style.opacity = 0.5;
+		this.$dropBox.show();
+		$('output, canvas').css({'opacity': 0.1});
 	},
 	dragleave: function (e) {
 		e.stopPropagation();
 		e.preventDefault();
-		this.dropzone.style.opacity = this.dropped ? 0 : 1;
+
+		this.$dropBox.hide();
+		$('output, canvas').css({'opacity': 1});
 	},
 	drop: function (e) {
 		e.stopPropagation();
 		e.preventDefault();
-		var dt = e.dataTransfer;
+		var dt = e.originalEvent.dataTransfer;
 		var files = dt.files;
 		this.dropped = true;
-		this.dropzone.style.opacity = 0;
 
 		this.ondrop(files);
+		this.$dropBox.hide();
+		$('output, canvas').css({'opacity': 1});
 	},
 	ondrop: function (files) {
-		handleFiles(files);
+		handleFiles(files, document.getElementsByTagName('canvas')[0]);
 	}
 };
 
-var canvas = document.getElementsByTagName('canvas')[0],
-	//canvas2 = document.getElementById('canvas2'),
-	context = canvas.getContext('2d'),
-	//context2 = canvas2.getContext('2d'),
-	reader;
-
-function handleFiles(files) {
-	var file = files[0];
-
-	reader = new FileReader();
+function handleFiles(files, canvas) {
+	var file = files[0],
+		reader = new FileReader(),
+		context = canvas.getContext('2d');
 
 	reader.onload = function(e) {
 
 		var imgObj = new Image();
 
 		imgObj.onload = function() {
-			//console.log(imgObj.width,imgObj.height);
+			//console.log(this === imgObj);
+			var ratio = this.width / this.height;
+			//if (this.width > this.height) {
+			canvas.width = this.width;
+			canvas.height = this.height;
+			//}
+
 			context.drawImage(this, 0, 0, this.width, this.height, 0, 0, canvas.width, canvas.height);
 
 			getValues(); analyze(); printValues(); //paintGrid(context);
@@ -82,12 +77,14 @@ function handleFiles(files) {
 }
 
 DropHandler.init();
-var cw = canvas.width,
-	ch = canvas.height,
-	charw = 3,
-	charh = 5,
-	gridWidth = cw / charw,
-	gridHeight = ch / charh,
+var canvas = document.getElementsByTagName('canvas')[0],
+	context = canvas.getContext('2d'),
+	cw = null,
+	ch = null,
+	charw = 7,
+	charh = 13,
+	gridWidth = null,
+	gridHeight = null,
 	valueArray = [],
 	min = Infinity,
 	max = 0,
@@ -141,6 +138,10 @@ function putRectangle (ctx, data, coords) {
 }
 
 function getValues () {
+	cw = canvas.width;
+	ch = canvas.height;
+	gridWidth = Math.floor(cw / charw);
+	gridHeight = Math.floor(ch / charh);
 	valueArray = [];
 
 	for (var i = 0; i < gridHeight; i++) {
@@ -160,7 +161,7 @@ function getValues () {
 function printValues() {
 	var text = '';
 
-	document.getElementById('out').innerHTML = text;
+	$('output pre').text(text);
 
 	for ( var i = 0; i < gridHeight; i++ ) {
 		for ( var j = 0; j < gridWidth; j++ ) {
@@ -187,10 +188,10 @@ function printValues() {
 				console.log(e);
 			}
 		}
-		text += "<br>";
+		text += "\n";
 	}
 
-	document.getElementById('out').innerHTML = text;
+	$('output pre').text(text);
 }
 
 function paintGrid(ctx) {
@@ -204,8 +205,8 @@ function paintGrid(ctx) {
 
 $('header input.preview').on("click", function () {
 	if (!$(this).is(':checked')) {
-		$('canvas').hide();
+		$('canvas').hide(200);
 	} else {
-		$('canvas').show();
+		$('canvas').show(300);
 	}
 });
