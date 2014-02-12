@@ -14,19 +14,45 @@ var canvas = document.getElementsByTagName('canvas')[0],
 	step = null,
 	chars = " .-:*+=%#@".split("").reverse().join("");
 
-function sum_4 (arr) {
-	var sum = 0,
-		arl = arr.length/*,
-		alpha_values = (arl / 4) * 255*/;
-
-	for (var i = 0; i < arl; i += 4 ) {
-		sum += arr[i];
-		sum += arr[i + 1];
-		sum += arr[i + 2];
+function getValues () {
+	cw = canvas.width;
+	ch = canvas.height;
+	gridWidth = Math.floor(cw / charw);
+	gridHeight = Math.floor(ch / charh);
+	valueArray = [];
+	
+	function sum_4 (arr) {
+		var sum = 0,
+			arl = arr.length/*,
+			alpha_values = (arl / 4) * 255*/;
+	
+		for (var i = 0; i < arl; i += 4 ) {
+			sum += arr[i];
+			sum += arr[i + 1];
+			sum += arr[i + 2];
+		}
+	
+		return sum/* - alpha_values*/;
+	}
+	
+	function getRectangle (coords) {
+		return context.getImageData(coords[0], coords[1], charw, charh).data;
 	}
 
-	return sum/* - alpha_values*/;
+	for (var i = 0; i < gridHeight; i++) {
+		var line = [];
+	
+		for (var j = 0; j < gridWidth; j++) {
+			var coords = [j * charw, i * charh];
+
+			line.push(sum_4(getRectangle(coords)));
+
+		}
+		//console.log(line);
+		valueArray.push(line);
+	}
 }
+
 function analyze () {
 
 	for (var i = 0, mx = valueArray.length; i < mx; i++) {
@@ -49,35 +75,6 @@ function analyze () {
 	step = (range - min) / chars.length;
 }
 
-function getRectangle (coords) {
-	//console.log(coords);
-	return context.getImageData(coords[0], coords[1], charw, charh).data;
-}
-
-function putRectangle (ctx, data, coords) {
-	ctx.putImageData(data, coords[0], coords[1]);
-}
-
-function getValues () {
-	cw = canvas.width;
-	ch = canvas.height;
-	gridWidth = Math.floor(cw / charw);
-	gridHeight = Math.floor(ch / charh);
-	valueArray = [];
-
-	for (var i = 0; i < gridHeight; i++) {
-		var line = [];
-	
-		for (var j = 0; j < gridWidth; j++) {
-			var coords = [j * charw, i * charh];
-
-			line.push(sum_4(getRectangle(coords)));
-
-		}
-		//console.log(line);
-		valueArray.push(line);
-	}
-}
 
 function printValues() {
 	var text = '';
@@ -113,6 +110,10 @@ function printValues() {
 	}
 
 	$('output pre').text(text);
+}
+
+function putRectangle (ctx, data, coords) {
+	ctx.putImageData(data, coords[0], coords[1]);
 }
 
 function paintGrid(ctx) {
