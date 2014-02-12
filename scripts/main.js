@@ -1,11 +1,11 @@
 var canvas = document.getElementsByTagName('canvas')[0],
 	context = canvas.getContext('2d'),
-	cw = canvas.width,
-	ch = canvas.height,
-	charw = 3,
-	charh = 5,
-	gridWidth = cw / charw,
-	gridHeight = ch / charh,
+	cw = null,
+	ch = null,
+	charw = 7,
+	charh = 13,
+	gridWidth = null,
+	gridHeight = null,
 	valueArray = [],
 	min = Infinity,
 	max = 0,
@@ -59,6 +59,10 @@ function putRectangle (ctx, data, coords) {
 }
 
 function getValues () {
+	cw = canvas.width;
+	ch = canvas.height;
+	gridWidth = Math.floor(cw / charw);
+	gridHeight = Math.floor(ch / charh);
 	valueArray = [];
 
 	for (var i = 0; i < gridHeight; i++) {

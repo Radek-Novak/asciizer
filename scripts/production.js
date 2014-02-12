@@ -58,7 +58,13 @@ function handleFiles(files, canvas) {
 		var imgObj = new Image();
 
 		imgObj.onload = function() {
-			//console.log(imgObj.width,imgObj.height);
+			//console.log(this === imgObj);
+			var ratio = this.width / this.height;
+			//if (this.width > this.height) {
+			canvas.width = this.width;
+			canvas.height = this.height;
+			//}
+
 			context.drawImage(this, 0, 0, this.width, this.height, 0, 0, canvas.width, canvas.height);
 
 			getValues(); analyze(); printValues(); //paintGrid(context);
@@ -73,12 +79,12 @@ function handleFiles(files, canvas) {
 DropHandler.init();
 var canvas = document.getElementsByTagName('canvas')[0],
 	context = canvas.getContext('2d'),
-	cw = canvas.width,
-	ch = canvas.height,
-	charw = 3,
-	charh = 5,
-	gridWidth = cw / charw,
-	gridHeight = ch / charh,
+	cw = null,
+	ch = null,
+	charw = 7,
+	charh = 13,
+	gridWidth = null,
+	gridHeight = null,
 	valueArray = [],
 	min = Infinity,
 	max = 0,
@@ -132,6 +138,10 @@ function putRectangle (ctx, data, coords) {
 }
 
 function getValues () {
+	cw = canvas.width;
+	ch = canvas.height;
+	gridWidth = Math.floor(cw / charw);
+	gridHeight = Math.floor(ch / charh);
 	valueArray = [];
 
 	for (var i = 0; i < gridHeight; i++) {

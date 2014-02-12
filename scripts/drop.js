@@ -58,7 +58,13 @@ function handleFiles(files, canvas) {
 		var imgObj = new Image();
 
 		imgObj.onload = function() {
-			//console.log(imgObj.width,imgObj.height);
+			//console.log(this === imgObj);
+			var ratio = this.width / this.height;
+			//if (this.width > this.height) {
+			canvas.width = this.width;
+			canvas.height = this.height;
+			//}
+
 			context.drawImage(this, 0, 0, this.width, this.height, 0, 0, canvas.width, canvas.height);
 
 			getValues(); analyze(); printValues(); //paintGrid(context);
