@@ -1,57 +1,52 @@
 <!DOCTYPE html>
 <html lang="cs">
-	<head>
-		<meta charset="utf-8" />
-		<title>Asciizer</title>
-		<meta name="description" content="Asciizer creates ascii-art by converting images to characters">
-		<meta name="keywords" content="ascii, ascii-art, fixedsys">
-		<meta name="author" content="" />
-		<meta name="robots" content="index,follow" />
 
-		<link rel="stylesheet" type="text/css" href="styles/style.min.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="styles/print.min.css" media="print" />
-		
-		<!--[if lt IE 9]>
-			<script src="./scripts/html5shiv.js"></script>
-		<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>Asciizer</title>
+    <meta name="description" content="Asciizer creates ascii-art by converting images to characters">
+    <meta name="keywords" content="ascii, ascii-art, fixedsys">
+    <meta name="author" content="" />
+    <meta name="robots" content="index,follow" />
 
-		<script src="./scripts/jquery.js"></script>
-		
-	</head>
-	<body>
-		
-		<header>
-			<nav>
-				<ul>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-				</ul>
-			</nav>
-			<input type="checkbox" class="preview" id="preview">
-			<label for="preview">picture</label>
-		</header>
-		
-		<main>
-			<canvas width="400" height="300"></canvas>
-	
-			<output>
-				<pre>
-				</pre>
-			</output>
+    <link rel="stylesheet" type="text/css" href="styles/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="styles/print.min.css" media="print" />
 
-		</main>
-		
-		<footer>
-			
-		</footer>
-		<div class="dropBox">
-			<div class="dropMessage">Drop it already!</div>
-		</div>
+    <!--[if lt IE 9]>
+		<script src="./scripts/html5shiv.js"></script>
+	<![endif]-->
+</head>
 
-	<!--<script src="drop.js"></script>
-	<script src="pizels.js"></script>		-->
-		<script src="./scripts/production.js"></script>
-	</body>
+<body>
+    <div class="pagewrap">
+        <div class="sidebar column">
+            <div class="controls">
+                <input type="checkbox" class="preview" id="preview">
+                <label for="preview">show original</label>
+
+                <label for="pic-w">width:</label>
+                <input type="number" id="pic-w" value="100">
+            </div>
+        </div>
+
+        <div class="main column">
+            <canvas width="400" height="300"></canvas>
+
+            <div id="original-image"></div>
+
+            <output>
+                <pre></pre>
+            </output>
+
+        </div>
+    </div>
+    <footer></footer>
+    <div class="dropBox">
+        <div class="dropMessage">Drop it already!</div>
+    </div>
+
+    <script src="./scripts/lib/jquery.js"></script>
+    <script src="./scripts/main.js"></script>
+</body>
+
 </html>

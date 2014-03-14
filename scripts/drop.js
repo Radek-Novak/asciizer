@@ -23,14 +23,14 @@ var DropHandler = {
 		e.stopPropagation();
 		e.preventDefault();
 		this.$dropBox.show();
-		$('output, canvas').css({'opacity': 0.1});
+		$('.pagewrap').css({'opacity': 0});
 	},
 	dragleave: function (e) {
 		e.stopPropagation();
 		e.preventDefault();
 
 		this.$dropBox.hide();
-		$('output, canvas').css({'opacity': 1});
+		$('.pagewrap').css({'opacity': 1});
 	},
 	drop: function (e) {
 		e.stopPropagation();
@@ -41,7 +41,7 @@ var DropHandler = {
 
 		this.ondrop(files);
 		this.$dropBox.hide();
-		$('output, canvas').css({'opacity': 1});
+		$('.pagewrap').css({'opacity': 1});
 	},
 	ondrop: function (files) {
 		handleFiles(files, document.getElementsByTagName('canvas')[0]);
@@ -58,19 +58,18 @@ function handleFiles(files, canvas) {
 		var imgObj = new Image();
 
 		imgObj.onload = function() {
-			//console.log(this === imgObj);
 			var ratio = this.width / this.height;
-			//if (this.width > this.height) {
 			canvas.width = this.width;
 			canvas.height = this.height;
-			//}
 
 			context.drawImage(this, 0, 0, this.width, this.height, 0, 0, canvas.width, canvas.height);
 
-			getValues(); analyze(); printValues(); //paintGrid(context);
+			current = new Asciizer(canvas, getGridWidth(), ratio);
 		};
 
 		imgObj.src = reader.result;
+		imgObj.alt = "current picture";
+		$('#original-image').empty().append(imgObj);
 	};
 
 	reader.readAsDataURL(file);
