@@ -29,3 +29,12 @@
 *.css    text
 *.js     text
 *.sql    text
+*.less   text
+*.sass   text
+*.scss   text
+*.map   text
+*.json   text
+
+*.jpg    binary
+*.png    binary
+*.gif    binary

@@ -44,27 +44,21 @@ var DropHandler = {
 		$('.pagewrap').css({'opacity': 1});
 	},
 	ondrop: function (files) {
-		handleFiles(files, document.getElementsByTagName('canvas')[0]);
+		handleFiles(files);
 	}
 };
 
-function handleFiles(files, canvas) {
+function handleFiles(files) {
 	var file = files[0],
-		reader = new FileReader(),
-		context = canvas.getContext('2d');
-
+		reader = new FileReader();
+		
 	reader.onload = function(e) {
 
 		var imgObj = new Image();
 
 		imgObj.onload = function() {
-			var ratio = this.width / this.height;
-			canvas.width = this.width;
-			canvas.height = this.height;
 
-			context.drawImage(this, 0, 0, this.width, this.height, 0, 0, canvas.width, canvas.height);
-
-			current = new Asciizer(canvas, getGridWidth(), ratio);
+			current = new Asciizer(this, getGridWidth());
 		};
 
 		imgObj.src = reader.result;

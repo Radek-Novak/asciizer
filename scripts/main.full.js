@@ -1,9 +1,10 @@
-function Asciizer(canvas, gridWidth, ratio) {
-    var context = canvas.getContext('2d'),
+function Asciizer(imgObj, gridWidth) {
+    var canvas = $('#atelier')[0],
+        context = canvas.getContext('2d'),
         CHAR_RATIO = 7 / 13,
+        img = imgObj,
+        ratio = img.width / img.height,
         gridHeight = Math.floor(CHAR_RATIO*(gridWidth / ratio)),
-        charw = Math.floor(canvas.width / gridWidth),
-        charh = Math.floor(canvas.height / gridHeight),
         valueArray = [],
         min = Infinity,
         max = 0,
@@ -11,6 +12,13 @@ function Asciizer(canvas, gridWidth, ratio) {
         range = null,
         step = null,
         chars = " .-:*+=%#@".split("").reverse().join("");
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+
+    var charw = Math.floor(canvas.width / gridWidth),
+        charh = Math.floor(canvas.height / gridHeight);
 
     window.val = [charw, charh, gridWidth, gridHeight, canvas];
 
@@ -123,6 +131,8 @@ function Asciizer(canvas, gridWidth, ratio) {
         }
     }
 
+    context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+
     getValues();
     analyze();
     printValues();
@@ -176,27 +186,21 @@ var DropHandler = {
 		$('.pagewrap').css({'opacity': 1});
 	},
 	ondrop: function (files) {
-		handleFiles(files, document.getElementsByTagName('canvas')[0]);
+		handleFiles(files);
 	}
 };
 
-function handleFiles(files, canvas) {
+function handleFiles(files) {
 	var file = files[0],
-		reader = new FileReader(),
-		context = canvas.getContext('2d');
-
+		reader = new FileReader();
+		
 	reader.onload = function(e) {
 
 		var imgObj = new Image();
 
 		imgObj.onload = function() {
-			var ratio = this.width / this.height;
-			canvas.width = this.width;
-			canvas.height = this.height;
 
-			context.drawImage(this, 0, 0, this.width, this.height, 0, 0, canvas.width, canvas.height);
-
-			current = new Asciizer(canvas, getGridWidth(), ratio);
+			current = new Asciizer(this, getGridWidth());
 		};
 
 		imgObj.src = reader.result;

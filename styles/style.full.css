@@ -188,10 +188,6 @@ body .column.main {
   padding-top: 20px;
   padding-left: 20px;
 }
-body .column.main canvas {
-  display: none;
-  margin: 0 auto;
-}
 body .column.main #original-image {
   max-width: 100%;
   padding: 3%;
@@ -240,4 +236,7 @@ body .dropBox .dropMessage {
   text-shadow: #000000 0px -4px, #000000 0px 4px, #000000 -4px 0px, #000000 4px 0px;
   height: 50px;
   font-size: 40px;
+}
+body #atelier {
+  display: none;
 }
