@@ -4,23 +4,52 @@ function Asciizer(imgObj, gridWidth) {
         CHAR_RATIO = 7 / 13,
         img = imgObj,
         ratio = img.width / img.height,
-        gridHeight = Math.floor(CHAR_RATIO*(gridWidth / ratio)),
+        gridHeight = null,
         valueArray = [],
         min = Infinity,
         max = 0,
         sum = 0,
         range = null,
         step = null,
+        charw = null,
+        charh = null,
         chars = " .-:*+=%#@".split("").reverse().join("");
 
     canvas.width = img.width;
     canvas.height = img.height;
 
-
-    var charw = Math.floor(canvas.width / gridWidth),
+    this.setGridDimensions = function(w) {
+        gridWidth = w;
+        gridHeight = Math.floor(CHAR_RATIO * (gridWidth / ratio));
+        charw = Math.floor(canvas.width / gridWidth);
         charh = Math.floor(canvas.height / gridHeight);
+    };
+
+    this.calculate = function(w) {
+        w = w || gridWidth;
+        this.setGridDimensions(w);
+        
+        context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+
+        getValues();
+        analyze();
+        printValues();
+
+        // cleanup for recalc
+        min = Infinity;
+        max = 0;
+        sum = 0;
+        range = null;
+        step = null;
+        valueArray = [];
+    };
+    this.setGridDimensions(gridWidth);
+
+
+    this.calculate();
 
     window.val = [charw, charh, gridWidth, gridHeight, canvas];
+
 
     function getValues() {
         valueArray = [];
@@ -85,7 +114,7 @@ function Asciizer(imgObj, gridWidth) {
     function printValues() {
         var text = '';
 
-        $('output pre').text(text);
+        $('pre output').text(text);
 
         for (var i = 0; i < gridHeight; i++) {
             for (var j = 0; j < gridWidth; j++) {
@@ -115,7 +144,7 @@ function Asciizer(imgObj, gridWidth) {
             text += "\n";
         }
 
-        $('output pre').text(text);
+        $('pre output').text(text);
     }
 
     function putRectangle(ctx, data, coords) {
@@ -131,15 +160,7 @@ function Asciizer(imgObj, gridWidth) {
         }
     }
 
-    context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-
-    getValues();
-    analyze();
-    printValues();
 }
-
-var current;
-
 var DropHandler = {
 	$dropzone: null,
 	$dropMessage: null,
@@ -175,14 +196,19 @@ var DropHandler = {
 		$('.pagewrap').css({'opacity': 1});
 	},
 	drop: function (e) {
+		var dt = e.originalEvent.dataTransfer,
+			files = dt.files;
+			
 		e.stopPropagation();
 		e.preventDefault();
-		var dt = e.originalEvent.dataTransfer;
-		var files = dt.files;
+
+
 		this.dropped = true;
 
 		this.ondrop(files);
 		this.$dropBox.hide();
+		$('.intro').hide();
+		$('.pagewrap').show();
 		$('.pagewrap').css({'opacity': 1});
 	},
 	ondrop: function (files) {
@@ -193,14 +219,14 @@ var DropHandler = {
 function handleFiles(files) {
 	var file = files[0],
 		reader = new FileReader();
-		
+
 	reader.onload = function(e) {
 
 		var imgObj = new Image();
 
 		imgObj.onload = function() {
 
-			current = new Asciizer(this, getGridWidth());
+			last = new Asciizer(this, getGridWidth());
 		};
 
 		imgObj.src = reader.result;
@@ -213,6 +239,7 @@ function handleFiles(files) {
 
 DropHandler.init();
 
+var last;
 $('.sidebar input.preview').on("click", function () {
 	var orig = $('#original-image'),
 		label = $('[for="preview"]');
@@ -227,3 +254,6 @@ $('.sidebar input.preview').on("click", function () {
 function getGridWidth () {
 	return $('#pic-w').val();
 }
+$('.recalc').click(function(){
+	last.calculate(getGridWidth());
+});

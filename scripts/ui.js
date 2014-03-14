@@ -12,3 +12,6 @@ $('.sidebar input.preview').on("click", function () {
 function getGridWidth () {
 	return $('#pic-w').val();
 }
+$('.recalc').click(function(){
+	last.calculate(getGridWidth());
+});

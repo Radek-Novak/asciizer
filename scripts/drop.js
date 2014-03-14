@@ -33,14 +33,19 @@ var DropHandler = {
 		$('.pagewrap').css({'opacity': 1});
 	},
 	drop: function (e) {
+		var dt = e.originalEvent.dataTransfer,
+			files = dt.files;
+			
 		e.stopPropagation();
 		e.preventDefault();
-		var dt = e.originalEvent.dataTransfer;
-		var files = dt.files;
+
+
 		this.dropped = true;
 
 		this.ondrop(files);
 		this.$dropBox.hide();
+		$('.intro').hide();
+		$('.pagewrap').show();
 		$('.pagewrap').css({'opacity': 1});
 	},
 	ondrop: function (files) {
@@ -51,14 +56,14 @@ var DropHandler = {
 function handleFiles(files) {
 	var file = files[0],
 		reader = new FileReader();
-		
+
 	reader.onload = function(e) {
 
 		var imgObj = new Image();
 
 		imgObj.onload = function() {
 
-			current = new Asciizer(this, getGridWidth());
+			last = new Asciizer(this, getGridWidth());
 		};
 
 		imgObj.src = reader.result;

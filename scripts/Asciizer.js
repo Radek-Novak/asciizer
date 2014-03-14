@@ -4,23 +4,52 @@ function Asciizer(imgObj, gridWidth) {
         CHAR_RATIO = 7 / 13,
         img = imgObj,
         ratio = img.width / img.height,
-        gridHeight = Math.floor(CHAR_RATIO*(gridWidth / ratio)),
+        gridHeight = null,
         valueArray = [],
         min = Infinity,
         max = 0,
         sum = 0,
         range = null,
         step = null,
+        charw = null,
+        charh = null,
         chars = " .-:*+=%#@".split("").reverse().join("");
 
     canvas.width = img.width;
     canvas.height = img.height;
 
-
-    var charw = Math.floor(canvas.width / gridWidth),
+    this.setGridDimensions = function(w) {
+        gridWidth = w;
+        gridHeight = Math.floor(CHAR_RATIO * (gridWidth / ratio));
+        charw = Math.floor(canvas.width / gridWidth);
         charh = Math.floor(canvas.height / gridHeight);
+    };
+
+    this.calculate = function(w) {
+        w = w || gridWidth;
+        this.setGridDimensions(w);
+        
+        context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+
+        getValues();
+        analyze();
+        printValues();
+
+        // cleanup for recalc
+        min = Infinity;
+        max = 0;
+        sum = 0;
+        range = null;
+        step = null;
+        valueArray = [];
+    };
+    this.setGridDimensions(gridWidth);
+
+
+    this.calculate();
 
     window.val = [charw, charh, gridWidth, gridHeight, canvas];
+
 
     function getValues() {
         valueArray = [];
@@ -85,7 +114,7 @@ function Asciizer(imgObj, gridWidth) {
     function printValues() {
         var text = '';
 
-        $('output pre').text(text);
+        $('pre output').text(text);
 
         for (var i = 0; i < gridHeight; i++) {
             for (var j = 0; j < gridWidth; j++) {
@@ -115,7 +144,7 @@ function Asciizer(imgObj, gridWidth) {
             text += "\n";
         }
 
-        $('output pre').text(text);
+        $('pre output').text(text);
     }
 
     function putRectangle(ctx, data, coords) {
@@ -131,11 +160,4 @@ function Asciizer(imgObj, gridWidth) {
         }
     }
 
-    context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-
-    getValues();
-    analyze();
-    printValues();
 }
-
-var current;
