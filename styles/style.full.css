@@ -203,6 +203,7 @@ body .column.main #original-image img {
 body .column.main output {
   display: inline-block;
   border: 5px double #345;
+  background-color: #ffffff;
   font-family: Courier, sans-serif;
   font-size: 12px;
   line-height: 13px;

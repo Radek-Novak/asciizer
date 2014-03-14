@@ -27,45 +27,118 @@
 	margin: auto;
 }
 
+//font-face rule
+.fontFace(@fontName; @fontFile; @fontWeight: normal; @fontStyle: normal) {
+	@font-face{
+		font-family: @fontName;
+		font-weight: @fontWeight;
+		font-style: @fontStyle;
+		src: url("@{fontsDir}@{fontFile}.eot");
+		src: url("@{fontsDir}@{fontFile}.eot?#iefix") format("embedded-opentype"),
+			url("@{fontsDir}@{fontFile}.woff") format("woff"),
+			url("@{fontsDir}@{fontFile}.ttf") format("truetype");
+	}
+}
+
 //placeholder multidefinition
-.placeholder(@ffamily: Arial; @fsize: 16px; @fweight: normal; @col: black) {
+.placeholder(@col; @ffamily: inherit; @fsize: inherit; @fweight: inherit; @opacity: 1) {
 	::-webkit-input-placeholder {
 		font-family: @ffamily;
 		font-size: @fsize;
 		font-weight: @fweight;
 		color: @col;
+		opacity: @opacity;
 	}		
 	:-moz-placeholder {
 		font-family: @ffamily;
 		font-size: @fsize;
 		font-weight: @fweight;
 		color: @col;
-
+		opacity: @opacity;
 	}		
 	::-moz-placeholder {
 		font-family: @ffamily;
 		font-size: @fsize;
 		font-weight: @fweight;
 		color: @col;
+		opacity: @opacity;
 	}
 	:-ms-input-placeholder {  
 		font-family: @ffamily;
 		font-size: @fsize;
 		font-weight: @fweight;
 		color: @col;
+		opacity: @opacity;
 	}
 }
 
+//backgorund definitions
+.bg(@image; @position: 0 0; @repeat: no-repeat) when (isstring(@image)) {
+	background: url("@{imagesDir}@{image}") @repeat @position;
+}
+
+.bg(@color) when (iscolor(@color)) {
+	background-color: @color;
+}
+
+.bg(@color; @image; @position: 0 0; @repeat: no-repeat) when (iscolor(@color)), (isstring(@image)) {
+	background: @color url("@{imagesDir}@{image}") @repeat @position;
+}
+
+.bgImg(@image) {
+	background-image: url("@{imagesDir}@{image}");
+}
+
+//width and height
+.size(@width; @height) {
+	width: @width;
+	height: @height;
+}
+
+.size(@dim) {
+	width: @dim;
+	height: @dim;
+}
+
 //absolute position
-.abs(@top: 0; @left: 0) {
+.abs(@left: 0; @top: 0) {
 	position: absolute;
 	top: @top;
 	left: @left;
 }
 
+.absR(@right: 0; @top: 0) {
+	position: absolute;
+	top: @top;
+	right: @right;
+}
+
+.absB(@left: 0; @bottom: 0) {
+	position: absolute;
+	bottom: @bottom;
+	left: @left;
+}
+
+.absRB(@right: 0; @bottom: 0) {
+	position: absolute;
+	bottom: @bottom;
+	right: @right;
+}
+
 //relative position
-.rel(@top: 0; @left: 0) {
+.rel(@left: 0; @top: 0) {
 	position: relative;
+	top: @top;
+	left: @left;
+}
+
+.rel() {
+	position: relative;
+}
+
+//fix position
+.fix(@left: 0; @top: 0) {
+	position: fixed;
 	top: @top;
 	left: @left;
 }
@@ -81,4 +154,57 @@
 .verticalText(@height; @subset: 0) {
 	height: @height;
 	line-height: (@height - @subset);
+}
+
+//font definitions
+.font(@color; @size; @weight; @style; @family) when (iscolor(@color)) {
+	color: @color;
+	font-family: @family;
+	font-size: @size;
+	font-weight: @weight;
+	font-style: @style;
+}
+
+.font(@color; @size; @weight; @style) when (iscolor(@color)) {
+	color: @color;
+	font-size: @size;
+	font-weight: @weight;
+	font-style: @style;
+}
+
+.font(@color; @size; @weight) when (iscolor(@color)) {
+	color: @color;
+	font-size: @size;
+	font-weight: @weight;
+}
+
+.font(@color; @size) when (iscolor(@color)) {
+	color: @color;
+	font-size: @size;
+}
+
+.font(@color) when (iscolor(@color)) {
+	color: @color;
+}
+
+.font(@size; @weight; @style; @family) when (isnumber(@size)) {
+	font-family: @family;
+	font-size: @size;
+	font-weight: @weight;
+	font-style: @style;
+}
+
+.font(@size; @weight; @style) when (isnumber(@size)) {
+	font-size: @size;
+	font-weight: @weight;
+	font-style: @style;
+}
+
+.font(@size; @weight) when (isnumber(@size)) {
+	font-size: @size;
+	font-weight: @weight;
+}
+
+.font(@size) when (isnumber(@size)) {
+	font-size: @size;
 }
