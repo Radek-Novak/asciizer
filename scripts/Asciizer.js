@@ -114,7 +114,7 @@ function Asciizer(imgObj, gridWidth) {
     function printValues() {
         var text = '';
 
-        $('pre output').text(text);
+        $('pre').text(text);
 
         for (var i = 0; i < gridHeight; i++) {
             for (var j = 0; j < gridWidth; j++) {
@@ -144,7 +144,7 @@ function Asciizer(imgObj, gridWidth) {
             text += "\n";
         }
 
-        $('pre output').text(text);
+        $('pre').text(text);
     }
 
     function putRectangle(ctx, data, coords) {

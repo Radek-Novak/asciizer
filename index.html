@@ -1,89 +1,88 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+
     <title>Asciizer</title>
+
     <meta name="description" content="Asciizer creates ascii-art by converting images to characters">
     <meta name="keywords" content="ascii, ascii-art, fixedsys">
-    <meta name="author" content="" />
-    <meta name="robots" content="index,follow" />
+    <meta name="author" content="">
+    <meta name="robots" content="index,follow">
 
-    <link rel="stylesheet" type="text/css" href="styles/style.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="styles/print.min.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="styles/print.min.css" media="print">
 
     <!--[if lt IE 9]>
-		<script src="./scripts/html5shiv.js"></script>
-	<![endif]-->
+        <script src="./scripts/html5shiv.js"></script>
+    <![endif]-->
 </head>
 
 <body>
-    <div class="pagewrap">
-        <div class="sidebar column">
-            <div class="controls">
-                <input type="checkbox" class="preview" id="preview">
-                <label for="preview">show original</label>
-
-                <label for="pic-w">width:</label>
-                <input type="number" id="pic-w" value="100">
-
-                <button class="recalc">Recalculate</button>
-            </div>
-        </div>
-
-        <div class="main column">
-            <!--<canvas width="400" height="300"></canvas>-->
-
-            <div id="original-image"></div>
-
-                <pre>
-            <output>
-            </output>
-                    
-                </pre>
-
+    <div class="outside-box draggable">
+        <div class="inner-box">
+            
         </div>
     </div>
-    <div class="intro">
-        <pre>
+    <div id="original-image" class="box draggable"></div>
 
+    <div class="outside-box draggable resizable">
+        <div class="inner-box">
+            <div class="drawingSpace">
+                <pre>
+                                                     
                      - --... ..-                     
-                     %%%+%*=:+:%.                    
-                     %#%#%%%%=%=-                    
+                     %+%*=:+:%.                    
+                     %#%#%=%=-                    
                      %####@#@#%=-                    
-                     %=#%#%%*=:+                     
-                     ==%==+:-*:*.                    
-                     =#++::.  +*-                    
+                     %=#%#%*=:+                     
+                     ==%==+:▓█░▒.                    
+                     =#++::.░▒▓█  +*-                    
                      %=%*+-*-::=.                    
-                     %+#%%%%+#==-                    
+                     %+#%+#==-                    
                      *%+#%#=#=%*.                    
-                     ++=%%====++                     
+                     ++=%====++                     
                      %+=:+:*-*-%-                    
                      +=:*.:.-.+%-                    
-                     **+%%#%#%##-                    
+                     **+%#%#%##-                    
                      *-=*@#@#@#@:                    
-                     +*--.:=%%=#-                    
+                     +*--.:=%=#-                    
                      ==:..**%=%=:                    
                      @%=-**%+%+#-                    
         . ..--:-:-::*##=+++=+==#+*:--:--. ..--       
         .*==%+%+%=#+#=%=%*=*+*=+#=%=#*%*=:=-.        
           :==%=%=%=%=%=%=%+=*=*==%=#=%==++:          
-            :=%%%%%%%#%##@#@##=#=@=@#@%@+.           
-              ::=*=+%=#%@#@%#=%*=+%%@#=.             
-                .-::+=%%%%++:*::*+===-               
+            :=%#%##@#@##=#=@=@#@%@+.           
+              ::=*=+%=#%@#@%#=%*=+%@#=.             
+                .-::+=%++:*::*+===-               
                  .:%=#+%++::.:.%*#*-                 
-                   -=%%++-:.- :+=-                   
+                   -=%++-:.- :+=-                   
                      .====++**=:                     
                        -=#%@+*                       
                          *%*                         
-        </pre>
-        <span class="instructions">Drag and drop a picture anywhere in the window or use this: <input type="file"></span>
-        
-    </div>
+                                                     
+            Drag and drop a picture anywhere         
+                 in the window or use this:          
+                                                     
+                </pre>
+            </div>
+            <div class="controls">
+                <input type="checkbox" id="preview">
+                <label class="checkboxlabel" for="preview">show original</label>
 
+                <label for="pic-w">width:</label>
+                <input type="text" class="input-number" id="pic-w" value="100">
+
+                <button class="recalc">Recalculate</button>
+
+            </div>
+        </div>
+    </div>
     <canvas id="atelier"></canvas>
 
     <script src="./scripts/lib/jquery.js"></script>
+    <script src="./scripts/lib/jquery-ui-1.10.4.custom.min.js"></script>
     <script src="./scripts/main.js"></script>
 </body>
 

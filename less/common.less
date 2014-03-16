@@ -1,32 +1,56 @@
-//
-// Common basic definitons
-//
-
-*,
-*:before,
-*:after{
-	-moz-box-sizing: border-box; 
-	-webkit-box-sizing: border-box; 
-	box-sizing: border-box;
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family:"fixedsys_excelsior_3.01Rg", Fixedsys, monospace !important;
+    font-size: 16px !important;
+    line-height: 16px !important;
 }
-
-html{
-	background-color: #fff;
+html {
+    min-height: 100%;
+    background: #0000cd;
 }
-
-body{
-	font-size: 10px;
-	line-height: 1.25;
+a {
+    color: inherit;
 }
-
-b, strong{
-	font-weight: bold;
+[type="checkbox"], label, button {
+    cursor: pointer;
 }
-
-i, em{
-	font-style: italic;
+button {
+    position: relative;
+    border: none;
+    height: @charh;
+    display: inline-block;
+    box-shadow: @charw @charh/2 0 0 rgba(0,0,0,0.5);
+	padding: 0 2*@charw;
+    &:active {
+		top: @charh/2;
+		left: @charw;
+		box-shadow: none;
+    }
 }
-
-a{
-	color: inherit;
+input {
+    padding: 0;
+    width: auto;
+    line-height: @charh;
+    height: @charh;
+    border: none;
+}
+.input-number {
+	width: 4*@charw;
+	text-align: right;
+	padding-right: 3px;
+}
+[type="checkbox"] {
+    display: none;
+}
+[type="checkbox"]:checked + label:before {
+    content: "[*]";  
+}
+.checkboxlabel:before {
+    content:'[ ]';
+    text-align: center;
+    width: 3*@charw;
+    height: @charh;
+    margin-right: @charw;
 }

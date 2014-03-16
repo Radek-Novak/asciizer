@@ -114,7 +114,7 @@ function Asciizer(imgObj, gridWidth) {
     function printValues() {
         var text = '';
 
-        $('pre output').text(text);
+        $('pre').text(text);
 
         for (var i = 0; i < gridHeight; i++) {
             for (var j = 0; j < gridWidth; j++) {
@@ -144,7 +144,7 @@ function Asciizer(imgObj, gridWidth) {
             text += "\n";
         }
 
-        $('pre output').text(text);
+        $('pre').text(text);
     }
 
     function putRectangle(ctx, data, coords) {
@@ -168,9 +168,7 @@ var DropHandler = {
 	dropped: false,
 
 	init: function () {
-		this.$dropzone = $('html');
-		this.$dropMessage = $('.dropMessage');
-		this.$dropBox = $('.dropBox');
+		this.$dropzone = $('.drawingSpace');
 
 		this.$dropzone.on('dragenter', this.dragenter.bind(this));
 		this.$dropzone.on('dragover', this.dragover.bind(this));
@@ -185,15 +183,14 @@ var DropHandler = {
 	dragover: function (e) {
 		e.stopPropagation();
 		e.preventDefault();
-		this.$dropBox.show();
-		$('.pagewrap').css({'opacity': 0});
+		this.$dropzone.css({'opacity': 0.1});
+		console.log(this);
 	},
 	dragleave: function (e) {
 		e.stopPropagation();
 		e.preventDefault();
 
-		this.$dropBox.hide();
-		$('.pagewrap').css({'opacity': 1});
+		this.$dropzone.css({'opacity': 1});
 	},
 	drop: function (e) {
 		var dt = e.originalEvent.dataTransfer,
@@ -202,14 +199,10 @@ var DropHandler = {
 		e.stopPropagation();
 		e.preventDefault();
 
-
 		this.dropped = true;
 
 		this.ondrop(files);
-		this.$dropBox.hide();
-		$('.intro').hide();
-		$('.pagewrap').show();
-		$('.pagewrap').css({'opacity': 1});
+		this.$dropzone.css({'opacity': 1});
 	},
 	ondrop: function (files) {
 		handleFiles(files);
@@ -240,20 +233,35 @@ function handleFiles(files) {
 DropHandler.init();
 
 var last;
-$('.sidebar input.preview').on("click", function () {
-	var orig = $('#original-image'),
-		label = $('[for="preview"]');
-	if (!$(this).is(':checked')) {
-		orig.hide(200);
-		label.text('show original pic');
-	} else {
-		orig.show(300);
-		label.text('hide original pic');
-	}
+var char_size = {w: 8, h: 16};
+
+$('.menu input.preview').on("click", function() {
+    var orig = $('#original-image'),
+        label = $('[for="preview"]');
+    if (!$(this).is(':checked')) {
+        orig.hide(200);
+        label.text('show original pic');
+    } else {
+        orig.show(300);
+        label.text('hide original pic');
+    }
 });
-function getGridWidth () {
-	return $('#pic-w').val();
+
+function getGridWidth() {
+    return $('#pic-w').val();
 }
-$('.recalc').click(function(){
-	last.calculate(getGridWidth());
+
+$('.recalc').click(function() {
+    last.calculate(getGridWidth());
+});
+
+$(".draggable").draggable({
+    grid: [char_size.w, char_size.h],
+    containment: "parent",
+    cancel: '.inner-box',
+    stack: ".draggable"
+});
+
+$(".resizable").resizable({
+    grid: [char_size.w, char_size.h]
 });

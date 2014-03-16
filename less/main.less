@@ -1,98 +1,23 @@
-html {
-    font-family: "fixedsys_excelsior_3.01Rg", Fixedsys, monospace;
-    font-size: 16px;
-    min-height: 100%;
-}
 body {
     position: relative;
-    background: #eee;
     min-height: 100%;
-    .pagewrap {
-        overflow: hidden;
-        //min-height: 100%;
-        display: none;
-    }
-    .intro {
-        width: 50%;
-        height: 60%;
-        text-align: center;
-        .absCenter();
+    min-width: 100%;
 
-        pre {
-            margin-bottom: 10px;
-        }
-        .instructions {
-            font-size: 3em;
-            [type="file"] {
-                display: block;
-                margin: 0 auto;
-            }
+
+    #original-image {
+        max-width: 100%;
+        padding: 3%;
+        display: none;
+        img {
+            max-width: 100%;
         }
     }
-    .column {
-        padding-bottom: 20010px;
-        margin-bottom: -20000px;
-        float: left;
-        @sidebarWidth: 150px;
-        &.sidebar {
-            font-size: 1.5em;
-            width: @sidebarWidth;
-            height: 100%;
-            background: white;
-            #preview, [for="preview"] {
-                cursor: pointer;
-            }
-            [type="number"] {
-                width: 50px;
-                padding-left: 5px;
-            }
-        }
-        &.main {
-            padding-top: 20px;
-            padding-left: 20px;
-            width: ~"calc(100% - @{sidebarWidth})";
-            #original-image {
-                max-width: 100%;
-                padding: 3%;
-                display: none;
-                img {
-                    max-width: 100%;
-                }
-            }
-            output {
-                display: inline-block;
-                border: 5px double #345;
-                .bg(#fff);
-                font-size: 16px;
-                line-height: 13px;
-                padding: 5px;
-            }
-        }
-    }
+
     footer {
-        ///position: relative;
         width: 100%;
         clear: both;
         height: 1px;
         background: #ddd;
-    }
-    .dropBox {
-        .absCenter();
-        width: 80%;
-        height: 80%;
-        color: white;
-        z-index: -1;
-        //border: 3px dashed gray;
-        border-radius: 100%;
-        text-align: center;
-        background: blue;
-        //display: none;
-        .dropMessage {
-            .absCenter();
-            text-shadow: black 0px -4px, black 0px 4px, black -4px 0px, black 4px 0px;
-            height: 50px;
-            font-size: 40px;
-        }
     }
     #atelier {
         display: none;

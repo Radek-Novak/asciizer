@@ -5,9 +5,7 @@ var DropHandler = {
 	dropped: false,
 
 	init: function () {
-		this.$dropzone = $('html');
-		this.$dropMessage = $('.dropMessage');
-		this.$dropBox = $('.dropBox');
+		this.$dropzone = $('.drawingSpace');
 
 		this.$dropzone.on('dragenter', this.dragenter.bind(this));
 		this.$dropzone.on('dragover', this.dragover.bind(this));
@@ -22,15 +20,14 @@ var DropHandler = {
 	dragover: function (e) {
 		e.stopPropagation();
 		e.preventDefault();
-		this.$dropBox.show();
-		$('.pagewrap').css({'opacity': 0});
+		this.$dropzone.css({'opacity': 0.1});
+		console.log(this);
 	},
 	dragleave: function (e) {
 		e.stopPropagation();
 		e.preventDefault();
 
-		this.$dropBox.hide();
-		$('.pagewrap').css({'opacity': 1});
+		this.$dropzone.css({'opacity': 1});
 	},
 	drop: function (e) {
 		var dt = e.originalEvent.dataTransfer,
@@ -39,14 +36,10 @@ var DropHandler = {
 		e.stopPropagation();
 		e.preventDefault();
 
-
 		this.dropped = true;
 
 		this.ondrop(files);
-		this.$dropBox.hide();
-		$('.intro').hide();
-		$('.pagewrap').show();
-		$('.pagewrap').css({'opacity': 1});
+		this.$dropzone.css({'opacity': 1});
 	},
 	ondrop: function (files) {
 		handleFiles(files);
