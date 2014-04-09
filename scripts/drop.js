@@ -5,7 +5,7 @@ var DropHandler = {
 	dropped: false,
 
 	init: function () {
-		this.$dropzone = $('.drawingSpace');
+		this.$dropzone = $('.drawing');
 
 		this.$dropzone.on('dragenter', this.dragenter.bind(this));
 		this.$dropzone.on('dragover', this.dragover.bind(this));
@@ -61,7 +61,7 @@ function handleFiles(files) {
 
 		imgObj.src = reader.result;
 		imgObj.alt = "current picture";
-		$('#original-image').empty().append(imgObj);
+		$('.original-image').empty().append(imgObj);
 	};
 
 	reader.readAsDataURL(file);

@@ -20,70 +20,67 @@
 </head>
 
 <body>
-    <div class="outside-box draggable">
-        <div class="inner-box">
-            
-        </div>
-    </div>
-    <div id="original-image" class="box draggable"></div>
-
     <div class="outside-box draggable resizable">
         <div class="inner-box">
-            <div class="drawingSpace">
+            <div class="original-image"></div>
+            <div class="drawing">
                 <pre>
                                                      
                      - --... ..-                     
-                     %+%*=:+:%.                    
-                     %#%#%=%=-                    
+                     %%%+%*=:+:%.                    
+                     %#%#%%%%=%=-                    
                      %####@#@#%=-                    
-                     %=#%#%*=:+                     
-                     ==%==+:▓█░▒.                    
-                     =#++::.░▒▓█  +*-                    
+                     %=#%#%%*=:+                     
+                     ==%==+:-*:*.                    
+                     =#++::.  +*-                    
                      %=%*+-*-::=.                    
-                     %+#%+#==-                    
+                     %+#%%%%+#==-                    
                      *%+#%#=#=%*.                    
-                     ++=%====++                     
+                     ++=%%====++                     
                      %+=:+:*-*-%-                    
                      +=:*.:.-.+%-                    
-                     **+%#%#%##-                    
+                     **+%%#%#%##-                    
                      *-=*@#@#@#@:                    
-                     +*--.:=%=#-                    
+                     +*--.:=%%=#-                    
                      ==:..**%=%=:                    
                      @%=-**%+%+#-                    
         . ..--:-:-::*##=+++=+==#+*:--:--. ..--       
         .*==%+%+%=#+#=%=%*=*+*=+#=%=#*%*=:=-.        
           :==%=%=%=%=%=%=%+=*=*==%=#=%==++:          
-            :=%#%##@#@##=#=@=@#@%@+.           
-              ::=*=+%=#%@#@%#=%*=+%@#=.             
-                .-::+=%++:*::*+===-               
+            :=%%%%%%%#%##@#@##=#=@=@#@%@+.           
+              ::=*=+%=#%@#@%#=%*=+%%@#=.             
+                .-::+=%%%%++:*::*+===-               
                  .:%=#+%++::.:.%*#*-                 
-                   -=%++-:.- :+=-                   
+                   -=%%++-:.- :+=-                   
                      .====++**=:                     
                        -=#%@+*                       
                          *%*                         
                                                      
-            Drag and drop a picture anywhere         
-                 in the window or use this:          
-                                                     
-                </pre>
+               Drag and drop a picture in            
+                this window or use this:             
+                                                     </pre>
             </div>
             <div class="controls">
-                <input type="checkbox" id="preview">
+
+                <div class="resize">
+                    <div class="indicator">
+                        <span class="width">54</span>
+                        <span class="sep">x</span>
+                        <span class="height">33</span>
+
+                        <button class="recalc">Recalculate</button>
+                    </div>
+                </div>
+
+                <input type="checkbox" class="preview" id="preview">
                 <label class="checkboxlabel" for="preview">show original</label>
-
-                <label for="pic-w">width:</label>
-                <input type="text" class="input-number" id="pic-w" value="100">
-
-                <button class="recalc">Recalculate</button>
-
             </div>
         </div>
-    </div>
-    <canvas id="atelier"></canvas>
+        <canvas id="atelier"></canvas>
 
-    <script src="./scripts/lib/jquery.js"></script>
-    <script src="./scripts/lib/jquery-ui-1.10.4.custom.min.js"></script>
-    <script src="./scripts/main.js"></script>
+        <script src="./scripts/lib/jquery.js"></script>
+        <script src="./scripts/lib/jquery-ui-1.10.4.custom.min.js"></script>
+        <script src="./scripts/main.js"></script>
 </body>
 
 </html>

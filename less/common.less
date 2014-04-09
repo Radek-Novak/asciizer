@@ -8,7 +8,7 @@
 }
 html {
     min-height: 100%;
-    background: #0000cd;
+    background: @darkBlue;
 }
 a {
     color: inherit;
@@ -27,6 +27,16 @@ button {
 		top: @charh/2;
 		left: @charw;
 		box-shadow: none;
+		&:before {
+			width: 100%;
+			height: 100%;
+			content: ' ';
+			display: block;
+			position: absolute;
+			background-color: transparent;
+			top: -@charh;
+			left: -@charw;
+		}
     }
 }
 input {

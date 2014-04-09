@@ -2,22 +2,36 @@ body {
     position: relative;
     min-height: 100%;
     min-width: 100%;
-
-
-    #original-image {
-        max-width: 100%;
-        padding: 3%;
-        display: none;
-        img {
-            max-width: 100%;
+    .inner-box {
+        position: relative;
+        .original-image, .drawing {
+            /*position: absolute;
+            top: 4px;
+            left: 4px;*/
         }
-    }
-
-    footer {
-        width: 100%;
-        clear: both;
-        height: 1px;
-        background: #ddd;
+        .original-image {
+            max-width: 100%;
+            display: none;
+            img {
+                max-width: 100%;
+            }
+        }
+        .controls {
+            position: absolute;
+            bottom: 0;
+            .checkboxlabel, .resize, .recalc {
+                float: left;
+                margin: 0 @charw;
+            }
+            .resize {
+                * {
+                    float: left;
+                }
+                .sep {
+                    margin: 0 @charw;
+                }
+            }
+        }
     }
     #atelier {
         display: none;

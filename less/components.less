@@ -3,23 +3,23 @@
 .outside-box {
     display: inline-block;
     box-shadow: 2*@charw @charh 0 0 rgba(0, 0, 0, 0.5);
-    padding: 5px;
-    background-color: #04aaac;
+    padding: 11px 6px;
+    background-color: @teal;
     cursor: move;
-
-	.inner-box {
-		.clear();
+    height: 678px;
+    width: 516px;
+    .inner-box {
+        .clear();
         border: @double-border-width double black;
-        padding: 10px;
-		width: 100%;
-		height: 100%;
+        padding: 8px 5px 52px;
+        width: 100%;
+        height: 100%;
         cursor: default;
-	}
-	.controls {
-		line-height: @charh;
-        padding: @charh;
-
-	}
+    }
+    .controls {
+        line-height: @charh;
+        padding: @charh @charw;
+    }
 }
 .box {
     padding: 9px 8px;
@@ -38,18 +38,20 @@
         display: block;
     }
 }
-.drawingSpace {
-    padding: 9px 8px;
+.drawing {
+    padding: 8px 9px;
     background: white;
-    display: inline-block;
-    margin: 0 auto;
-
+    display: block;
+    //margin: 0 auto;
+    width: 100%;
+    height: 100%;
     pre {
         .bg(#fff);
-        display: inline-block;
+        display: block;
         border: @single-border-width solid black;
-        padding: 5px;
+        padding: 8px 7px;
         cursor: text;
+        width: 100%;
+        height: 100%;
     }
 }
-
