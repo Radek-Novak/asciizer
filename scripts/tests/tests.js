@@ -50,14 +50,8 @@ test("Drawing to canvas", function() {
     ctx.drawImage(el_testImages[19], 0, 0, canvas.width, canvas.height);
     result = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
-    // test
-
-    // check
     notDeepEqual(pretest, result, "something was drawn");
 
-    //ok(result.w == a && result.h == b, "Passed!" );
-
-    // cleanup 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
@@ -84,9 +78,6 @@ test("Getting canvas raw values", function() {
 
     ok(oktest, "reading drawn image");
     ok(canvas.width * canvas.height === result.length / 4, "length of data: " + result.length / 4);
-
-    // cleanup 
-    //ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
 test("Calculating pixel values ", function() {
@@ -153,8 +144,6 @@ test("Analysing char values", function() {
     ascObj.calculateCharValues();
     ascObj.analyze();
 
-    //ok(ascObj.charValues.length * 2 === ascObj.pixelLightness.length, "correct array length");
-    console.log(ascObj.analysis);
     for (var prop in ascObj.analysis) {
     	var cur = ascObj.analysis[prop];
     	ok(!isNaN(cur) && cur >= 0, "Property "+prop+" should be a number over zero. Value: "+cur);
@@ -164,5 +153,28 @@ test("Analysing char values", function() {
     		ok (!isNaN(cur) && cur <= ascObj.charValues.length * 765, "Property sum should be less than charValues * 765. Value: "+cur)
     	}
     }
+
+});
+
+test("Choosing characters", function () {
+	"use strict";
+    
+    var ascObj = new Asciizer(), 
+    	itsok = true;
+
+    ascObj.loadImage(testImages.diag);
+    ascObj.setCanvasSize(20);
+    ascObj.draw();
+    ascObj.readCanvas();
+    ascObj.calculatePixels();
+    ascObj.calculateCharValues();
+    ascObj.analyze();
+    ascObj.calcChars();
+    
+	for (var i = 0, ii = ascObj.charValues.length; i < ii; i++) {
+		itsok = itsok && (typeof ascObj.chargrid[i] === "string");
+	}
+
+	ok(itsok, "There are only strings in chargrid");
 
 });

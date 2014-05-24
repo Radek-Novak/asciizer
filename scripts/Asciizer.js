@@ -3,12 +3,7 @@ function Asciizer(imgObj, gridWidth) {
 
     var canvas = $('#atelier')[0],
         context = canvas.getContext('2d'),
-        CHAR_RATIO = 7 / 13,
-        CHAR_W = 8,
-        CHAR_H = 16,
         img = imgObj,
-        gridHeight = null,
-        charh = null,
         chars = " .-:*+=%#@".split("").reverse().join("");
 
     this.image = imgObj;
@@ -24,6 +19,7 @@ function Asciizer(imgObj, gridWidth) {
         range: null,
         avg: null
     };
+    this.chargrid = [];
 
     this.loadImage = function (i) {
         this.image = i || imgObj;
@@ -90,4 +86,22 @@ function Asciizer(imgObj, gridWidth) {
         an.avg = an.sum / this.charValues.length;
         an.range = an.max - an.min;
     }
+
+    this.calcChars = function (charset) {
+        var chargrid = this.chargrid,
+            charvals = this.charValues,
+            charset = charset || chars,
+            len = charset.length, 
+            step = this.analysis.range / (len-1);
+
+        for (var i = 0, ii = charvals.length; i < ii; i++) {
+            var cur = charvals[i],
+                index = ~~((cur-this.analysis.min)/step);
+
+            chargrid.push(charset[index]);
+
+        }
+    }
+
+    
 }
