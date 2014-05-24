@@ -98,8 +98,71 @@ test("Calculating pixel values ", function() {
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
-    ascObj.calculate();
+    ascObj.calculatePixels();
 
     ok(ascObj.valueArray.length === ascObj.pixelLightness.length * 4, "correct array length");
-	console.log(ascObj);
+});
+
+test("Calculating char values ", function() {
+    "use strict";
+    
+    var ascObj = new Asciizer();
+
+    ascObj.loadImage(testImages.diag);
+    ascObj.setCanvasSize(20);
+    ascObj.draw();
+    ascObj.readCanvas();
+    ascObj.calculatePixels();
+    ascObj.calculateCharValues();
+
+    ok(ascObj.charValues.length * 2 === ascObj.pixelLightness.length, "correct array length");
+});
+
+test("Checking char array's integrity", function() {
+	var problems = [],
+		itsok = true,
+		ascObj = new Asciizer();
+
+    ascObj.loadImage(testImages.diag);
+    ascObj.setCanvasSize(20);
+    ascObj.draw();
+    ascObj.readCanvas();
+    ascObj.calculatePixels();
+    ascObj.calculateCharValues();
+
+	for (var i = 0, ii = ascObj.charValues.length; i < ii; i++) {
+		itsok = !isNaN(ascObj.charValues[i]);
+		if (!itsok) {
+			problems.push(i);
+		}
+	};
+	ok(itsok, "Checking if every char value is a number. Problems: " + problems.join(','));
+
+});
+
+test("Analysing char values", function() {
+    "use strict";
+    
+    var ascObj = new Asciizer();
+
+    ascObj.loadImage(testImages.diag);
+    ascObj.setCanvasSize(20);
+    ascObj.draw();
+    ascObj.readCanvas();
+    ascObj.calculatePixels();
+    ascObj.calculateCharValues();
+    ascObj.analyze();
+
+    //ok(ascObj.charValues.length * 2 === ascObj.pixelLightness.length, "correct array length");
+    console.log(ascObj.analysis);
+    for (var prop in ascObj.analysis) {
+    	var cur = ascObj.analysis[prop];
+    	ok(!isNaN(cur) && cur >= 0, "Property "+prop+" should be a number over zero. Value: "+cur);
+    	if (prop != 'sum') {
+    		ok (!isNaN(cur) && cur <= 765, "Property "+prop+" should be a number less than 765. Value: "+cur)
+    	} else {
+    		ok (!isNaN(cur) && cur <= ascObj.charValues.length * 765, "Property sum should be less than charValues * 765. Value: "+cur)
+    	}
+    }
+
 });

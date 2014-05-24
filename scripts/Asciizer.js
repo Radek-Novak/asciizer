@@ -8,20 +8,22 @@ function Asciizer(imgObj, gridWidth) {
         CHAR_H = 16,
         img = imgObj,
         gridHeight = null,
-        min = Infinity,
-        max = 0,
-        sum = 0,
-        range = null,
-        step = null,
-        charw = null,
         charh = null,
         chars = " .-:*+=%#@".split("").reverse().join("");
 
     this.image = imgObj;
-    this.valueArray = [];
-    this.pixelLightness = [];
     this.grid_w = gridWidth;
     this.grid_h;
+    this.valueArray = [];
+    this.pixelLightness = [];
+    this.charValues = [];
+    this.analysis = {
+        min: Infinity,
+        max: 0,
+        sum: 0,
+        range: null,
+        avg: null
+    };
 
     this.loadImage = function (i) {
         this.image = i || imgObj;
@@ -46,7 +48,7 @@ function Asciizer(imgObj, gridWidth) {
         this.valueArray = context.getImageData(0, 0, canvas.width, canvas.height).data;
     }
 
-    this.calculate = function () {
+    this.calculatePixels = function () {
         for (var i = 0, ii = this.valueArray.length/4; i < ii; i++) {
             var va = this.valueArray;
             this.pixelLightness.push(
@@ -58,130 +60,34 @@ function Asciizer(imgObj, gridWidth) {
             );
         }
     }
-    /*this.calculate = function(w) {
-        w = w || gridWidth;
-        this.setGridDimensions(w);
-        
-        context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
 
-        getValues();
-        analyze();
-        printValues();
-
-        // cleanup for recalc
-        min = Infinity;
-        max = 0;
-        sum = 0;
-        range = null;
-        step = null;
-        valueArray = [];
-    };*/
-    //this.setGridDimensions(gridWidth);
-
-
-    //this.calculate();
-
-    //window.val = [charw, charh, gridWidth, gridHeight, canvas];
-
-
-    function getValues() {
-        valueArray = [];
-
-        function sum_4(arr) {
-            var sum = 0,
-                arl = arr.length;
-
-            for (var i = 0; i < arl; i += 4) {
-                sum += arr[i];
-                sum += arr[i + 1];
-                sum += arr[i + 2];
+    this.calculateCharValues = function () {
+        var pixl = this.pixelLightness;
+        for (var i = 0, ii = pixl.length; i < ii; i++) {
+            if ( (i / this.grid_w) % 2 === 0 ) {
+                i += this.grid_w - 1;
+                continue;
             }
-
-            return sum /* - alpha_values*/ ;
-        }
-
-        function getRectangle(coords) {
-
-            return context.getImageData(coords[0], coords[1], charw, charh).data;
-        }
-
-        for (var i = 0; i < gridHeight; i++) {
-            var line = [];
-
-            for (var j = 0; j < gridWidth; j++) {
-                var coords = [j * charw, i * charh];
-                try {
-                    line.push(sum_4(getRectangle(coords)));
-                } catch (e) {
-                    console.log(e, coords);
-                }
+            if ( i + this.grid_w < pixl.length) {
+                this.charValues.push((pixl[i] + pixl[i + this.grid_w])/2);
+            } else {
+                this.charValues.push(pixl[i]);
             }
-            //console.log(line);
-            valueArray.push(line);
         }
     }
 
-    function analyze() {
+    this.analyze = function () {
+        var charVals = this.charValues,
+            an = this.analysis;
 
-        for (var i = 0, mx = valueArray.length; i < mx; i++) {
-            for (var j = 0, mxj = valueArray[0].length; j < mxj; j++) {
-                try {
-                    var cur = valueArray[i][j];
-
-                    if (cur > max) {
-                        max = cur;
-                    } else if (cur < min) {
-                        min = cur;
-                    }
-                } catch (e) {
-                    console.log(i, j, e);
-                }
-            }
+        for (var i = 0, ii = charVals.length; i < ii; i++) {
+            var cur = charVals[i];
+            an.min = cur < an.min ? cur : an.min;
+            an.max = cur > an.max ? cur : an.max;
+            an.sum += cur;
         }
 
-        range = max - min;
-        step = (range - min) / chars.length;
+        an.avg = an.sum / this.charValues.length;
+        an.range = an.max - an.min;
     }
-
-
-    function printValues() {
-        var text = '';
-
-        $('pre').text(text);
-
-        for (var i = 0; i < gridHeight; i++) {
-            for (var j = 0; j < gridWidth; j++) {
-                try {
-                    //var c = valueArray[i][j] >= 500000 ? 'o' : '.';
-                    var charNumber = Math.floor(valueArray[i][j] / step),
-                        c = 'x';
-
-                    if (charNumber >= chars.length) {
-                        charNumber = chars.length - 1;
-                    } else if (charNumber < 0) {
-                        charNumber = 0;
-                    }
-
-                    c = chars[charNumber];
-
-                    if (c === undefined) {
-                        //console.log(valueArray[i][j], valueArray[i][j] / step);
-                    }
-
-                    text += c;
-
-                } catch (e) {
-                    console.log(e);
-                }
-            }
-            text += "\n";
-        }
-
-        $('pre').text(text);
-    }
-
-
-    (function startup () {
-        this.loadImage();
-    });
 }
