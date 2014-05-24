@@ -21,6 +21,8 @@ function Asciizer(imgObj, gridWidth) {
     };
     this.chargrid = [];
 
+    this.lines = [];
+
     this.loadImage = function (i) {
         this.image = i || imgObj;
     }
@@ -103,5 +105,27 @@ function Asciizer(imgObj, gridWidth) {
         }
     }
 
-    
+    this.splitIntoLines = function () {
+        var chargrid = this.chargrid,
+            gw = this.grid_w,
+            lines = this.lines;
+     
+        for ( var i = 0, ii = chargrid.length; i < ii; i += gw ) {
+            lines.push(chargrid.slice(i,i+gw));
+        }
+    }
+
+
+    this.log = function () {
+        var chargrid = this.chargrid,
+            gw = this.grid_w,
+            content = '';
+     
+        for ( var i = 0, ii = chargrid.length; i < ii; i += gw ) {
+            content += chargrid.slice(i,i+gw).join('') + '\n';
+        }
+
+        console.log(content);
+        return content;
+    }
 }

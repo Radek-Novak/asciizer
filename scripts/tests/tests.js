@@ -170,11 +170,38 @@ test("Choosing characters", function () {
     ascObj.calculateCharValues();
     ascObj.analyze();
     ascObj.calcChars();
-    
+
 	for (var i = 0, ii = ascObj.charValues.length; i < ii; i++) {
 		itsok = itsok && (typeof ascObj.chargrid[i] === "string");
 	}
 
 	ok(itsok, "There are only strings in chargrid");
+});
 
+
+test("Splitting into lines", function () {
+	"use strict";
+    
+    var ascObj = new Asciizer(), 
+    	lines = ascObj.lines,
+    	itsok = true;
+
+    ascObj.loadImage(testImages.diag);
+    ascObj.setCanvasSize(20);
+    ascObj.draw();
+    ascObj.readCanvas();
+    ascObj.calculatePixels();
+    ascObj.calculateCharValues();
+    ascObj.analyze();
+    ascObj.calcChars();
+    ascObj.splitIntoLines();
+    
+	for (var i = 0, ii = lines.length; i < ii; i++) {
+		itsok = itsok && lines[i].length === ascObj.grid_w;
+	}
+
+	itsok = itsok && lines.length;
+
+	ok(lines.length === ascObj.grid_h, "There's correct number of lines");
+	ok(itsok, "Lines have the same width");
 });
