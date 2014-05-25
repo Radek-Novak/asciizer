@@ -35,7 +35,7 @@ Asciizer.prototype.setCanvasSize = function (w, h) {
     this.grid_h = h || (this.image.height / ratio);
 
     this.canvas.width = w;
-    this.canvas.height = this.grid_h * 2;
+    this.canvas.height = this.grid_h;
 }
 
 Asciizer.prototype.draw = function (image2draw) {

@@ -12,13 +12,13 @@ var el_testImages = document.querySelectorAll('.test-images img'),
     asciizerObject = new Asciizer(el_testImages[0]),
     canvas = $('#atelier')[0],
     ctx = canvas.getContext('2d'),
-    currentTestImage = 'zlovule';
+    currentTestImage = 'zlovule',
+    currentCanvasW = 80;
 
 
 
 test("Calculating and setting canvas dimensions", function() {
-    var testA = 20,
-        ascObj = new Asciizer(testImages.black),
+    var ascObj = new Asciizer(testImages.black),
         cnvS, imgW, imgH, ratio;
 
     function getCanvasSize(sel) {
@@ -29,16 +29,16 @@ test("Calculating and setting canvas dimensions", function() {
             h: c.height
         };
     }
-    ascObj.setCanvasSize(testA);
+    ascObj.setCanvasSize(currentCanvasW);
 
     imgW = ascObj.image.width;
     imgH = ascObj.image.height;
-    ratio = imgW / testA;
+    ratio = imgW / currentCanvasW;
 
     // check
     cnvS = getCanvasSize();
-    ok(cnvS.w === testA && cnvS.h === (imgH / ratio) * 2, "Canvas dimensions: " + cnvS.w +'x'+ cnvS.h);
-    ok(ascObj.grid_w === testA && ascObj.grid_h === (imgH / ratio), "Chargrid dimensions: " + ascObj.grid_w +'x'+ ascObj.grid_h);
+    ok(cnvS.w === currentCanvasW && cnvS.h === (imgH / ratio), "Canvas dimensions: " + cnvS.w +'x'+ cnvS.h);
+    ok(ascObj.grid_w === currentCanvasW && ascObj.grid_h === (imgH / ratio), "Chargrid dimensions: " + ascObj.grid_w +'x'+ ascObj.grid_h);
 
 });
 
@@ -90,7 +90,7 @@ test("Calculating pixel values ", function() {
     var ascObj = new Asciizer();
 
     ascObj.loadImage(testImages[currentTestImage]);
-    ascObj.setCanvasSize(20);
+    ascObj.setCanvasSize(currentCanvasW);
     ascObj.draw();
     ascObj.readCanvas();
     ascObj.calculatePixels();
@@ -104,7 +104,7 @@ test("Calculating char values ", function() {
     var ascObj = new Asciizer();
 
     ascObj.loadImage(testImages[currentTestImage]);
-    ascObj.setCanvasSize(20);
+    ascObj.setCanvasSize(currentCanvasW);
     ascObj.draw();
     ascObj.readCanvas();
     ascObj.calculatePixels();
@@ -112,7 +112,7 @@ test("Calculating char values ", function() {
 
     ok(ascObj.charValues.length * 2 === ascObj.pixelLightness.length, "correct array length");
 
-    console.log(ascObj.charValues.length, ascObj.pixelLightness.length);
+    //console.log(ascObj.charValues.length, ascObj.pixelLightness.length);
 });
 
 test("Checking char array's integrity", function() {
@@ -121,7 +121,7 @@ test("Checking char array's integrity", function() {
 		ascObj = new Asciizer();
 
     ascObj.loadImage(testImages[currentTestImage]);
-    ascObj.setCanvasSize(20);
+    ascObj.setCanvasSize(currentCanvasW);
     ascObj.draw();
     ascObj.readCanvas();
     ascObj.calculatePixels();
@@ -143,7 +143,7 @@ test("Analysing char values", function() {
     var ascObj = new Asciizer();
 
     ascObj.loadImage(testImages[currentTestImage]);
-    ascObj.setCanvasSize(20);
+    ascObj.setCanvasSize(currentCanvasW);
     ascObj.draw();
     ascObj.readCanvas();
     ascObj.calculatePixels();
@@ -169,7 +169,7 @@ test("Choosing characters", function () {
     	itsok = true;
 
     ascObj.loadImage(testImages[currentTestImage]);
-    ascObj.setCanvasSize(20);
+    ascObj.setCanvasSize(currentCanvasW);
     ascObj.draw();
     ascObj.readCanvas();
     ascObj.calculatePixels();
@@ -193,7 +193,7 @@ test("Splitting into lines", function () {
     	itsok = true;
 
     ascObj.loadImage(testImages[currentTestImage]);
-    ascObj.setCanvasSize(20);
+    ascObj.setCanvasSize(currentCanvasW);
     ascObj.draw();
     ascObj.readCanvas();
     ascObj.calculatePixels();
@@ -212,4 +212,10 @@ test("Splitting into lines", function () {
 	ok(itsok, "Lines have the same width");
 
 	ascObj.log();
+
+    /*console.log(ascObj.valueArray.length, 
+		    	ascObj.pixelLightness.length, 
+		    	ascObj.charValues.length, 
+		    	ascObj.chargrid.length, 
+		    	ascObj.lines.length);*/
 });
