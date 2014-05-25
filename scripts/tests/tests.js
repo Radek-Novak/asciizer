@@ -11,7 +11,8 @@ var el_testImages = document.querySelectorAll('.test-images img'),
 
     asciizerObject = new Asciizer(el_testImages[0]),
     canvas = $('#atelier')[0],
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext('2d'),
+    currentTestImage = 'zlovule';
 
 
 
@@ -88,7 +89,7 @@ test("Calculating pixel values ", function() {
     
     var ascObj = new Asciizer();
 
-    ascObj.loadImage(testImages.zlovule);
+    ascObj.loadImage(testImages[currentTestImage]);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -102,7 +103,7 @@ test("Calculating char values ", function() {
     
     var ascObj = new Asciizer();
 
-    ascObj.loadImage(testImages.zlovule);
+    ascObj.loadImage(testImages[currentTestImage]);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -119,7 +120,7 @@ test("Checking char array's integrity", function() {
 		itsok = true,
 		ascObj = new Asciizer();
 
-    ascObj.loadImage(testImages.zlovule);
+    ascObj.loadImage(testImages[currentTestImage]);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -141,7 +142,7 @@ test("Analysing char values", function() {
     
     var ascObj = new Asciizer();
 
-    ascObj.loadImage(testImages.zlovule);
+    ascObj.loadImage(testImages[currentTestImage]);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -167,7 +168,7 @@ test("Choosing characters", function () {
     var ascObj = new Asciizer(), 
     	itsok = true;
 
-    ascObj.loadImage(testImages.zlovule);
+    ascObj.loadImage(testImages[currentTestImage]);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -191,7 +192,7 @@ test("Splitting into lines", function () {
     	lines = ascObj.lines,
     	itsok = true;
 
-    ascObj.loadImage(testImages.zlovule);
+    ascObj.loadImage(testImages[currentTestImage]);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();

@@ -1,11 +1,9 @@
 function Asciizer(imgObj, gridWidth) {
     "use strict";
 
-    var canvas = $('#atelier')[0],
-        context = canvas.getContext('2d'),
-        img = imgObj,
-        chars = " .-:*+=%#@".split("").reverse().join("");
-
+    this.canvas = $('#atelier')[0],
+    this.chars = " .-:*+=%#@".split("").reverse().join("");
+    this.context = this.canvas.getContext('2d');
     this.image = imgObj;
     this.grid_w = gridWidth;
     this.grid_h;
@@ -23,145 +21,144 @@ function Asciizer(imgObj, gridWidth) {
 
     this.lines = [];
 
-    this.loadImage = function (i) {
-        this.image = i || imgObj;
-    }
+}
+Asciizer.prototype.loadImage = function (i) {
+    this.image = i || imgObj;
+}
 
-    this.setCanvasSize = function (w, h) {
-        var ratio = this.image.width / w;
-        
-        this.grid_w = w;
-        this.grid_h = h || (this.image.height / ratio);
-
-        canvas.width = w;
-        canvas.height = this.grid_h * 2;
-    }
-
-    this.draw = function (image2draw) {
-        image2draw = image2draw || this.image;
-        context.drawImage(image2draw, 0, 0, canvas.width, canvas.height);
-    }
-
-    this.readCanvas = function () {
-        this.valueArray = context.getImageData(0, 0, canvas.width, canvas.height).data;
-    }
-
-
-   /*
-    * From 4 values (RGBA) calculates lightness of a pixel
-    * changes this.pixelLightness
-    */
-
-    this.calculatePixels = function () {
-        for (var i = 0, ii = this.valueArray.length/4; i < ii; i++) {
-            var va = this.valueArray;
-            this.pixelLightness.push(
-                (
-                    va[4*i] + va[4*i + 1] + va[4*i + 2])
-                    * 
-                    (256 / (va[4*i+3] + 1)
-                )
-            );
-        }
-    }
-
-
-   /*
-    * Averages 2 pixels for each char.
-    * changes this.analysis
-    */
-
-     this.calculateCharValues = function () {
-        var pixl = this.pixelLightness;
-        for (var i = 0, ii = pixl.length; i < ii; i++) {
-            if ( (i / this.grid_w) % 2 === 0 ) {
-                i += this.grid_w - 1;
-                continue;
-            }
-            if ( i + this.grid_w < pixl.length) {
-                this.charValues.push((pixl[i] + pixl[i + this.grid_w])/2);
-            } else {
-                this.charValues.push(pixl[i]);
-            }
-        }
-    }
-
-
-   /*
-    * Calculates min, max, sum, range, avg
-    * changes this.charValues
-    */
-
-    this.analyze = function () {
-        var charVals = this.charValues,
-            an = this.analysis;
-
-        for (var i = 0, ii = charVals.length; i < ii; i++) {
-            var cur = charVals[i];
-            an.min = cur < an.min ? cur : an.min;
-            an.max = cur > an.max ? cur : an.max;
-            an.sum += cur;
-        }
-
-        an.avg = an.sum / this.charValues.length;
-        an.range = an.max - an.min;
-    }
-
-
-   /*
-    * Selects char for each number
-    * changes this.chargrid
-    */
-
-    this.calcChars = function (charset) {
-        var chargrid = this.chargrid,
-            charvals = this.charValues,
-            charset = charset || chars,
-            len = charset.length, 
-            step = this.analysis.range / (len-1);
-
-        for (var i = 0, ii = charvals.length; i < ii; i++) {
-            var cur = charvals[i],
-                index = ~~((cur-this.analysis.min)/step);
-
-            chargrid.push(charset[index]);
-
-        }
-    }
-
+Asciizer.prototype.setCanvasSize = function (w, h) {
+    var ratio = this.image.width / w;
     
-   /*
-    * Splits the 1D array of characters into a 2D array
-    * changes this.lines
-    */
+    this.grid_w = w;
+    this.grid_h = h || (this.image.height / ratio);
 
-    this.splitIntoLines = function () {
-        var chargrid = this.chargrid,
-            gw = this.grid_w,
-            lines = this.lines;
-     
-        for ( var i = 0, ii = chargrid.length; i < ii; i += gw ) {
-            lines.push(chargrid.slice(i,i+gw));
+    this.canvas.width = w;
+    this.canvas.height = this.grid_h * 2;
+}
+
+Asciizer.prototype.draw = function (image2draw) {
+    image2draw = image2draw || this.image;
+    this.context.drawImage(image2draw, 0, 0, this.canvas.width, this.canvas.height);
+}
+
+Asciizer.prototype.readCanvas = function () {
+    this.valueArray = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height).data;
+}
+
+
+/*
+* From 4 values (RGBA) calculates lightness of a pixel
+* changes this.pixelLightness
+*/
+
+Asciizer.prototype.calculatePixels = function () {
+    for (var i = 0, ii = this.valueArray.length/4; i < ii; i++) {
+        var va = this.valueArray;
+        this.pixelLightness.push(
+            (
+                va[4*i] + va[4*i + 1] + va[4*i + 2])
+                * 
+                (256 / (va[4*i+3] + 1)
+            )
+        );
+    }
+}
+
+
+/*
+* Averages 2 pixels for each char.
+* changes this.analysis
+*/
+
+ Asciizer.prototype.calculateCharValues = function () {
+    var pixl = this.pixelLightness;
+    for (var i = 0, ii = pixl.length; i < ii; i++) {
+        if ( (i / this.grid_w) % 2 === 0 ) {
+            i += this.grid_w - 1;
+            continue;
+        }
+        if ( i + this.grid_w < pixl.length) {
+            this.charValues.push((pixl[i] + pixl[i + this.grid_w])/2);
+        } else {
+            this.charValues.push(pixl[i]);
         }
     }
+}
 
 
+/*
+* Calculates min, max, sum, range, avg
+* changes this.charValues
+*/
 
-   /*
-    * Logs and returns final result with linebreaks
-    * changes -
-    */
+Asciizer.prototype.analyze = function () {
+    var charVals = this.charValues,
+        an = this.analysis;
 
-    this.log = function () {
-        var chargrid = this.chargrid,
-            gw = this.grid_w,
-            content = '';
-     
-        for ( var i = 0, ii = chargrid.length; i < ii; i += gw ) {
-            content += chargrid.slice(i,i+gw).join('') + '\n';
-        }
-
-        console.log(content);
-        return content;
+    for (var i = 0, ii = charVals.length; i < ii; i++) {
+        var cur = charVals[i];
+        an.min = cur < an.min ? cur : an.min;
+        an.max = cur > an.max ? cur : an.max;
+        an.sum += cur;
     }
+
+    an.avg = an.sum / this.charValues.length;
+    an.range = an.max - an.min;
+}
+
+
+/*
+* Selects char for each number
+* changes this.chargrid
+*/
+
+Asciizer.prototype.calcChars = function (charset) {
+    var chargrid = this.chargrid,
+        charvals = this.charValues,
+        charset = charset || this.chars,
+        len = charset.length, 
+        step = this.analysis.range / (len-1);
+
+    for (var i = 0, ii = charvals.length; i < ii; i++) {
+        var cur = charvals[i],
+            index = ~~((cur-this.analysis.min)/step);
+
+        chargrid.push(charset[index]);
+
+    }
+}
+
+
+/*
+* Splits the 1D array of characters into a 2D array
+* changes this.lines
+*/
+
+Asciizer.prototype.splitIntoLines = function () {
+    var chargrid = this.chargrid,
+        gw = this.grid_w,
+        lines = this.lines;
+ 
+    for ( var i = 0, ii = chargrid.length; i < ii; i += gw ) {
+        lines.push(chargrid.slice(i,i+gw));
+    }
+}
+
+
+/*
+* Logs and returns final result with linebreaks
+* changes -
+*/
+
+Asciizer.prototype.log = function () {
+    var chargrid = this.chargrid,
+        gw = this.grid_w,
+        content = '';
+ 
+    for ( var i = 0, ii = chargrid.length; i < ii; i += gw ) {
+        content += chargrid.slice(i,i+gw).join('') + '\n';
+    }
+
+    console.log(content);
+    return content;
 }
