@@ -72,7 +72,7 @@ Asciizer.prototype.calculatePixels = function () {
 
 /*
 * Averages 2 pixels for each char.
-* changes this.analysis
+* changes this.charValues
 */
 
  Asciizer.prototype.calculateCharValues = function () {
@@ -94,7 +94,7 @@ Asciizer.prototype.calculatePixels = function () {
 
 /*
 * Calculates min, max, sum, range, avg
-* changes this.charValues
+* changes this.analysis
 */
 
 Asciizer.prototype.analyze = function () {
