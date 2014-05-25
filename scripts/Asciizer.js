@@ -23,10 +23,12 @@ function Asciizer(imgObj, gridWidth) {
 
 }
 Asciizer.prototype.loadImage = function (i) {
+    "use strict";
     this.image = i || imgObj;
 }
 
 Asciizer.prototype.setCanvasSize = function (w, h) {
+    "use strict";
     var ratio = this.image.width / w;
     
     this.grid_w = w;
@@ -37,11 +39,13 @@ Asciizer.prototype.setCanvasSize = function (w, h) {
 }
 
 Asciizer.prototype.draw = function (image2draw) {
+    "use strict";
     image2draw = image2draw || this.image;
     this.context.drawImage(image2draw, 0, 0, this.canvas.width, this.canvas.height);
 }
 
 Asciizer.prototype.readCanvas = function () {
+    "use strict";
     this.valueArray = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height).data;
 }
 
@@ -52,6 +56,7 @@ Asciizer.prototype.readCanvas = function () {
 */
 
 Asciizer.prototype.calculatePixels = function () {
+    "use strict";
     for (var i = 0, ii = this.valueArray.length/4; i < ii; i++) {
         var va = this.valueArray;
         this.pixelLightness.push(
@@ -71,6 +76,7 @@ Asciizer.prototype.calculatePixels = function () {
 */
 
  Asciizer.prototype.calculateCharValues = function () {
+    "use strict";
     var pixl = this.pixelLightness;
     for (var i = 0, ii = pixl.length; i < ii; i++) {
         if ( (i / this.grid_w) % 2 === 0 ) {
@@ -92,6 +98,7 @@ Asciizer.prototype.calculatePixels = function () {
 */
 
 Asciizer.prototype.analyze = function () {
+    "use strict";
     var charVals = this.charValues,
         an = this.analysis;
 
@@ -113,6 +120,7 @@ Asciizer.prototype.analyze = function () {
 */
 
 Asciizer.prototype.calcChars = function (charset) {
+    "use strict";
     var chargrid = this.chargrid,
         charvals = this.charValues,
         charset = charset || this.chars,
@@ -135,6 +143,7 @@ Asciizer.prototype.calcChars = function (charset) {
 */
 
 Asciizer.prototype.splitIntoLines = function () {
+    "use strict";
     var chargrid = this.chargrid,
         gw = this.grid_w,
         lines = this.lines;
@@ -151,6 +160,7 @@ Asciizer.prototype.splitIntoLines = function () {
 */
 
 Asciizer.prototype.log = function () {
+    "use strict";
     var chargrid = this.chargrid,
         gw = this.grid_w,
         content = '';
