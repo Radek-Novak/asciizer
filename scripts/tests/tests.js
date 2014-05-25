@@ -12,10 +12,11 @@ var el_testImages = document.querySelectorAll('.test-images img'),
     asciizerObject = new Asciizer(el_testImages[0]),
     canvas = $('#atelier')[0],
     ctx = canvas.getContext('2d'),
-    currentTestImage = 'zlovule',
+    currentTestImage = 'white',
     currentCanvasW = 80;
 
 
+$('title').append(' | picture: ' + currentTestImage + ' | char width: ' + currentCanvasW);
 
 test("Calculating and setting canvas dimensions", function() {
     var ascObj = new Asciizer(testImages.black),
@@ -212,7 +213,7 @@ test("Splitting into lines", function () {
 	ok(itsok, "Lines have the same width");
 
 	ascObj.log();
-
+	console.log(lines.length, ascObj.grid_h);
     /*console.log(ascObj.valueArray.length, 
 		    	ascObj.pixelLightness.length, 
 		    	ascObj.charValues.length, 
