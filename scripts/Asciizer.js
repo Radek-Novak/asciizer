@@ -46,6 +46,12 @@ function Asciizer(imgObj, gridWidth) {
         this.valueArray = context.getImageData(0, 0, canvas.width, canvas.height).data;
     }
 
+
+   /*
+    * From 4 values (RGBA) calculates lightness of a pixel
+    * changes this.pixelLightness
+    */
+
     this.calculatePixels = function () {
         for (var i = 0, ii = this.valueArray.length/4; i < ii; i++) {
             var va = this.valueArray;
@@ -59,7 +65,13 @@ function Asciizer(imgObj, gridWidth) {
         }
     }
 
-    this.calculateCharValues = function () {
+
+   /*
+    * Averages 2 pixels for each char.
+    * changes this.analysis
+    */
+
+     this.calculateCharValues = function () {
         var pixl = this.pixelLightness;
         for (var i = 0, ii = pixl.length; i < ii; i++) {
             if ( (i / this.grid_w) % 2 === 0 ) {
@@ -73,6 +85,12 @@ function Asciizer(imgObj, gridWidth) {
             }
         }
     }
+
+
+   /*
+    * Calculates min, max, sum, range, avg
+    * changes this.charValues
+    */
 
     this.analyze = function () {
         var charVals = this.charValues,
@@ -88,6 +106,12 @@ function Asciizer(imgObj, gridWidth) {
         an.avg = an.sum / this.charValues.length;
         an.range = an.max - an.min;
     }
+
+
+   /*
+    * Selects char for each number
+    * changes this.chargrid
+    */
 
     this.calcChars = function (charset) {
         var chargrid = this.chargrid,
@@ -105,6 +129,12 @@ function Asciizer(imgObj, gridWidth) {
         }
     }
 
+    
+   /*
+    * Splits the 1D array of characters into a 2D array
+    * changes this.lines
+    */
+
     this.splitIntoLines = function () {
         var chargrid = this.chargrid,
             gw = this.grid_w,
@@ -115,6 +145,12 @@ function Asciizer(imgObj, gridWidth) {
         }
     }
 
+
+
+   /*
+    * Logs and returns final result with linebreaks
+    * changes -
+    */
 
     this.log = function () {
         var chargrid = this.chargrid,

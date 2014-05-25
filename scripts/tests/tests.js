@@ -3,7 +3,10 @@ var el_testImages = document.querySelectorAll('.test-images img'),
     testImages = {
         white: $('[src$="white.jpg"]')[0],
         black: $('[src$="black.jpg"]')[0],
-        diag: $('[src$="diag.jpg"]')[0]
+        diag: $('[src$="diag.jpg"]')[0],
+        kruhyV: $('[src$="kruhyV.jpg"]')[0],
+        zlovule: $('[src$="Zlovůle.jpg"]')[0],
+        arrdown: $('[src$="arrowDown.png"]')[0]
     },
 
     asciizerObject = new Asciizer(el_testImages[0]),
@@ -85,7 +88,7 @@ test("Calculating pixel values ", function() {
     
     var ascObj = new Asciizer();
 
-    ascObj.loadImage(testImages.diag);
+    ascObj.loadImage(testImages.zlovule);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -99,7 +102,7 @@ test("Calculating char values ", function() {
     
     var ascObj = new Asciizer();
 
-    ascObj.loadImage(testImages.diag);
+    ascObj.loadImage(testImages.zlovule);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -107,6 +110,8 @@ test("Calculating char values ", function() {
     ascObj.calculateCharValues();
 
     ok(ascObj.charValues.length * 2 === ascObj.pixelLightness.length, "correct array length");
+
+    console.log(ascObj.charValues.length, ascObj.pixelLightness.length);
 });
 
 test("Checking char array's integrity", function() {
@@ -114,7 +119,7 @@ test("Checking char array's integrity", function() {
 		itsok = true,
 		ascObj = new Asciizer();
 
-    ascObj.loadImage(testImages.diag);
+    ascObj.loadImage(testImages.zlovule);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -136,7 +141,7 @@ test("Analysing char values", function() {
     
     var ascObj = new Asciizer();
 
-    ascObj.loadImage(testImages.diag);
+    ascObj.loadImage(testImages.zlovule);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -162,7 +167,7 @@ test("Choosing characters", function () {
     var ascObj = new Asciizer(), 
     	itsok = true;
 
-    ascObj.loadImage(testImages.diag);
+    ascObj.loadImage(testImages.zlovule);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -186,7 +191,7 @@ test("Splitting into lines", function () {
     	lines = ascObj.lines,
     	itsok = true;
 
-    ascObj.loadImage(testImages.diag);
+    ascObj.loadImage(testImages.zlovule);
     ascObj.setCanvasSize(20);
     ascObj.draw();
     ascObj.readCanvas();
@@ -204,4 +209,6 @@ test("Splitting into lines", function () {
 
 	ok(lines.length === ascObj.grid_h, "There's correct number of lines");
 	ok(itsok, "Lines have the same width");
+
+	ascObj.log();
 });
