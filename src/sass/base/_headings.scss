@@ -1,0 +1,125 @@
+/* ==========================================================================
+   Heading
+   ========================================================================== */
+
+/**
+ * As per: csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css
+ *
+ * When we define a heading we also define a corresponding class to go with it.
+ * This allows us to apply, say, `class=alpha` to a `h3`; a double-stranded
+ * heading hierarchy.
+ */
+ h1, .alpha {
+    @include font-size($h1);
+}
+h2, .beta {
+    @include font-size($h2);
+}
+h3, .gamma {
+    @include font-size($h3);
+}
+h4, .delta {
+    @include font-size($h4);
+}
+h5, .epsilon {
+    @include font-size($h5);
+}
+h6, .zeta {
+    @include font-size($h6);
+}
+/**
+ * A series of classes for setting massive type; for use in heroes, mastheads,
+ * promos, etc.
+ */
+ .giga {
+    @include font-size($giga);
+}
+.mega {
+    @include font-size($mega);
+}
+.kilo {
+    @include font-size($kilo);
+}
+h1, h2, h3, h4, h5, h6, .alpha, .beta, .gamma, .delta, .epsilon, .zeta {
+    .wf-loading & {
+        visibility: hidden;
+    }
+    .wf-active & {
+        font-family: $ff-proxima;
+        visibility: visible;
+    }
+}
+// subheader gradient lines 
+// http://codepen.io/RDKNVK/pen/Fbqcr?editors=110 
+@mixin subheader-color($from, $to) {
+    &:before {
+        background-image: linear-gradient(to right, $from, $to);
+        background-position: right center;
+    
+        .lt-ie9 & {
+            background-image: image-url('bg/bar-left.png');
+        }
+    }
+    &:after {
+        background-image: linear-gradient(to left, $from, $to);
+        background-position: left center;
+    
+        .lt-ie9 & {
+            background-image: image-url('bg/bar-right.png');
+        }
+    }
+}
+%subheader, .subheader {
+
+    @include subheader-color(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+    
+    @include breakpoint($s) {
+        display: table-row;
+    
+        &:before, &:after {
+            content:'';
+            display: table-cell;
+            width: 50%;
+            //background-position: center;
+            background-repeat: no-repeat;
+            -webkit-background-size: 100% 2px;
+            background-size: 100% 2px;
+        }
+        > * {
+            white-space: nowrap;
+            margin: 0;
+        }
+    }
+}
+.subheader--short {
+    &:after, &:before {
+        background-size: 140px 2px;
+    }
+    &:before {
+        background-position: right center;
+    }
+    &:after {
+        background-position: left center;
+    }
+    .lt-ie9 & {
+        &:before, &:after {
+            //background-position: center;
+        }
+    }
+}
+%subheader--blue {
+    @include breakpoint($s) {
+        &:before {
+            .lt-ie9 & {
+                background-position: right center;
+                background-image: image-url('bg/bar-blue-left.png');
+            }
+        }
+        &:after {
+            .lt-ie9 & {
+                background-position: left center;
+                background-image: image-url('bg/bar-blue-right.png');
+            }
+        }
+    }
+}

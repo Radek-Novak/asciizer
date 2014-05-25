@@ -15,8 +15,8 @@ var el_testImages = document.querySelectorAll('.test-images img'),
     currentTestImage = 'arrdown',
     currentCanvasW = 80;
 
-
 $('title').append(' | picture: ' + currentTestImage + ' | char width: ' + currentCanvasW);
+
 
 test("Calculating and setting canvas dimensions", function() {
     var ascObj = new Asciizer(testImages.black),
@@ -52,7 +52,7 @@ test("Drawing to canvas", function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     pretest = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
-    ctx.drawImage(el_testImages[19], 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(testImages.black, 0, 0, canvas.width, canvas.height);
     result = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
     notDeepEqual(pretest, result, "something was drawn");

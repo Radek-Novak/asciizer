@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+html {
+    color: #102e34;
+    font: normal #{($base-font-size / 16px) * 1em}/#{$line-height-ratio} $ff;
+    overflow-y: scroll;
+}
+
+body {
+    &.with-fixed-navbar {
+        padding-top: 70px; // height of fixed navbar
+    }
+}
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+
+audio,
+canvas,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/**
+ * Let’s make the box model all nice, shall we...?
+ */
+
+* {
+    &,
+    &:before,
+    &:after {
+        @include box-sizing(border-box);
+    }
+}
+
+/**
+ * Base elements
+ */
+h1, h2, h3, h4, h5, h6, hgroup,
+ul, ol, dl,
+blockquote, p, address,
+table,
+fieldset, figure,
+pre,
+/**
+ * Objects and abstractions
+ */
+%margin-bottom,
+.media,
+.island,
+.islet {
+    margin-bottom: $base-unit;
+}
+
+/**
+ * Basic links
+ */
+
+a {
+    color: inherit;
+    &:hover,
+    &:focus {
+        text-decoration: none;
+    }
+}
+
+address {
+    font-style: normal;
+}
