@@ -1,7 +1,2 @@
 node_modules/
-_materials/
-images/
-#package.json
-#Gruntfile.js
-#scripts/jquery.js
-#scripts/html5shiv.js
+.sass-cache/

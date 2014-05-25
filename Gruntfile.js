@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                 //livereload: true
             },
             css: {
-                files: 'src/sass/*.scss',
+                files: 'src/sass/**/*.scss',
                 tasks: ['compass']
             },
             js: {

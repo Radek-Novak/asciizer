@@ -1,0 +1,46 @@
+/* line 1, ../../../src/sass/vendor/jquery-ui.scss */
+.ui-resizable-se {
+  cursor: se-resize;
+  width: 16px;
+  height: 16px;
+  right: 1px;
+  bottom: 1px;
+}
+
+/* line 8, ../../../src/sass/vendor/jquery-ui.scss */
+.ui-resizable-handle {
+  position: absolute;
+  font-size: 0.1px;
+  display: block;
+}
+
+/* line 13, ../../../src/sass/vendor/jquery-ui.scss */
+.ui-icon {
+  display: block;
+  text-indent: -99999px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+}
+
+/* line 19, ../../../src/sass/vendor/jquery-ui.scss */
+.ui-icon-gripsmall-diagonal-se {
+  background-position: -64px -224px;
+}
+
+/* line 22, ../../../src/sass/vendor/jquery-ui.scss */
+.ui-resizable-s {
+  cursor: s-resize;
+  height: 7px;
+  width: 100%;
+  bottom: -5px;
+  left: 0;
+}
+
+/* line 29, ../../../src/sass/vendor/jquery-ui.scss */
+.ui-resizable-e {
+  cursor: e-resize;
+  width: 7px;
+  right: -5px;
+  top: 0;
+  height: 100%;
+}

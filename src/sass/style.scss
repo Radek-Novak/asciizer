@@ -1,117 +1,17 @@
-/* ==========================================================================
-   Styles
-   ========================================================================== */
-
-/**
- * Plugins
- */
-
 @import "compass";
-@import "breakpoint";
-
-
-/**
- * Vars
- */
 
 @import "vars";
 
-
-/**
- * Base
- */
-
 @import "base/normalize";
 @import "base/reset";
-@import "base/helpers";
 @import "base/base";
-@import "base/headings";
+@import "base/font-face";
+@import "base/form";
 
-@import "base/grid";
-//@import "base/font-face";
+@import "objects/button";
+@import "objects/window";
 
-/**
- * Utils
- */
-
-@import "utils/align";
-@import "utils/display";
-@import "utils/layout";
-@import "utils/link";
-@import "utils/position";
-@import "utils/size";
-@import "utils/space";
-@import "utils/state";
-@import "utils/text";
-
-
-/**
- * Vendors
- */
-
-@import "vendor/csswizardry-grids/index";
-@import "vendor/snap.js/index";
-@import "vendor/magnific-popup/magnific-popup";
-@import "vendor/sky-carousel/customized-default-skin";
-@import "vendor/resp-tabs/resp-tabs";
-
-/**
- * Objects
- */
-
-@import "objects/buttons";
-@import "objects/island";
-@import "objects/media";
-@import "objects/nav";
-
-
-/**
- * Partials
- */
-
-@import "partials/breadcrumb";
-@import "partials/dropdown";
-@import "partials/faq";
-@import "partials/languages";
-@import "partials/logo";
-@import "partials/menu";
-@import "partials/navbar";
-@import "partials/page";
-@import "partials/postcard";
-@import "partials/postcard-rev";
-@import "partials/press";
-@import "partials/promo";
-@import "partials/reservation";
-@import "partials/snap";
-@import "partials/submenu";
-@import "partials/subnavbar";
-
-@import "partials/section-header";
-@import "partials/section";
-@import "partials/notice";
-@import "partials/post";
-@import "partials/hero";
-@import "partials/photo";
-@import "partials/contacts";
-@import "partials/ad";
-@import "partials/webcams";
-@import "partials/media";
-@import "partials/article";
-@import "partials/table";
-@import "partials/activity-item";
-@import "partials/page-contacts";
-@import "partials/mapboxes";
-@import "partials/facecard";
-@import "partials/media-icons";
-@import "partials/schedule";
-@import "partials/mapbox";
-@import "partials/partners";
-@import "partials/form";
-/**
- * Shame
- */
+@import "vendor/utils";
+@import "vendor/jquery-ui.scss";
 
 @import "shame";
-
-
-@import "textova-stranka";
