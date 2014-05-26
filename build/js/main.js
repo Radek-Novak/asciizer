@@ -313,7 +313,7 @@ $('.plus, .minus').click(function() {
 $(".draggable").draggable({
     grid: [char_size.w, char_size.h],
     containment: "parent",
-    cancel: '.inner-box',
+    cancel: '.drawing',
     stack: ".draggable"
 });
 
