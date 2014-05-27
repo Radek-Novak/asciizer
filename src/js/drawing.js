@@ -4,16 +4,13 @@ function Drawing (sel) {
 
 	var getPos = function (event) {
 		
-		var pad = {t: 8, l: 7},
-			dr_w = $drawing.width(),
-			dr_h = $drawing.height(),
-			pos = {
-				x:	Math.floor((event.pageX - pad.l) / 8),
-				y: Math.floor((event.pageY - pad.t) / 16)
-			};
+		var $this = $(this),
+			//lineIndex =  Math.floor((event.pageX) / 8),
+			charIndex = $('.box__subbox--drawing pre').index($this),
+			charContent = $this.text()[charIndex];
 
-		console.log(pos);
-		return pos;
+		console.log(charContent,charIndex);
+		//return pos;
 	};
 	
 	mouseMoveHandle = $drawing.mousemove(getPos);

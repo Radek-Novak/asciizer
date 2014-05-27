@@ -37,7 +37,7 @@ $('.plus, .minus').click(function() {
 $(".draggable").draggable({
     grid: [char_size.w, char_size.h],
     containment: "parent",
-    cancel: '.drawing',
+    cancel: '.box__subbox--drawing',
     stack: ".draggable"
 });
 

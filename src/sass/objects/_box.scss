@@ -11,9 +11,7 @@
     box-shadow: 2*$charw $charh 0 0 rgba(0, 0, 0, 0.5);
     cursor: move;
     display: inline-block;
-    height: 678px;
     padding: 0 8px;
-    width: 516px;
 }
 %box__subbox {
 }
@@ -24,25 +22,24 @@
     background-color: $teal;
 }
 
-.box__subbox--white {
-	@extend %box__subbox;
+.box__subbox--drawing {
+	//@extend %box__subbox;
     @include border-img("../img/white-gray-1.gif");
 
     background-color: #fff;
 
+	pre {
+	    display: block;
+	    cursor: text;
+	    width: 100%;
+	    &:focus {
+	    	background-color: #eee;
+	    	outline: none;
+	    }
+	}
 }
 
-.drawing {
-
-}
-pre {
-    display: block;
-    cursor: text;
-    width: 100%;
-    height: 100%;
-}
-
-.controls {
+.box__subbox--controls {
     line-height: $charh;
     padding: $charh $charw;
 }
