@@ -31,11 +31,18 @@
 	pre {
 	    display: block;
 	    cursor: text;
-	    width: 100%;
+        position: relative;
+        width: 100%;
+
 	    &:focus {
 	    	background-color: #eee;
 	    	outline: none;
 	    }
+
+        .hovered {
+            background-color: #333;
+            color: #fff;
+        }
 	}
 }
 
