@@ -1,6 +1,9 @@
 @import "compass";
+@import "vendor/utils";
+@import "vendor/jquery-ui.scss";
 
 @import "vars";
+@import "extendable/selection";
 
 @import "base/normalize";
 @import "base/reset";
@@ -10,8 +13,5 @@
 
 @import "objects/button";
 @import "objects/box";
-
-@import "vendor/utils";
-@import "vendor/jquery-ui.scss";
 
 @import "shame";
