@@ -48,6 +48,8 @@
 }
 
 .box__subbox--controls {
+    @extend %no-select;
+    
     line-height: $charh;
     padding: $charh $charw;
 }

@@ -54,17 +54,14 @@
   height: 100%;
 }
 
-/* line 16, ../../src/sass/extendable/_selection.scss */
-.box__subbox--drawing::-moz-selection, .box__subbox--drawing pre::-moz-selection {
-  background: none;
-  color: none;
-  text-shadow: none;
-}
-/* line 22, ../../src/sass/extendable/_selection.scss */
-.box__subbox--drawing::selection, .box__subbox--drawing pre::selection {
-  background: none;
-  color: none;
-  text-shadow: none;
+/* line 15, ../../src/sass/extendable/_selection.scss */
+.box__subbox--drawing, .box__subbox--drawing pre, .box__subbox--controls {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
