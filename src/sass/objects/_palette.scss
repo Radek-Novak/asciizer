@@ -1,0 +1,17 @@
+.palette {
+	@include border-img('../img/gray-1.gif');
+
+	display: block;
+	float: left;
+
+	li {
+		display: block;
+		float: left;
+		text-align: center;
+		white-space: pre-wrap;
+		&.active {
+			background-color: $darkRed;
+			color: #fff;
+		}
+	}
+}

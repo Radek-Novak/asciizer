@@ -23,6 +23,9 @@ $tabs-number: 3;
 		&.ui-state-active {
 			background-color: $tab-active-bg;
 		}
+		a {
+			display: block;
+		}
 	}
 }
 .controls__tabs__tabcontents {
@@ -31,5 +34,12 @@ $tabs-number: 3;
 	background-color: $tab-content-bg;
 	float: left;
     padding: $charh $charw;
+    position: relative;
 	min-height: $tabs-number * $charh;
+
+	.btn-drawing-clear {
+		float: right;
+		margin-top: $charh;
+		margin-right: 2*$charw;
+	}
 }

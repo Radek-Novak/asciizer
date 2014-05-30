@@ -622,7 +622,7 @@ button:active:before {
   position: absolute;
   background-color: transparent;
   top: -16px;
-  left: -8px;
+  left: -16px;
 }
 
 /* line 27, ../../src/sass/base/_form.scss */
@@ -726,8 +726,12 @@ input {
 .controls__tabs__tablinks li.ui-state-active {
   background-color: #aaaaaa;
 }
+/* line 26, ../../src/sass/objects/_controls.scss */
+.controls__tabs__tablinks li a {
+  display: block;
+}
 
-/* line 28, ../../src/sass/objects/_controls.scss */
+/* line 31, ../../src/sass/objects/_controls.scss */
 .controls__tabs__tabcontents {
   width: -webkit-calc(100% - 80px);
   width: -moz-calc(100% - 80px);
@@ -737,5 +741,36 @@ input {
   background-color: #aaaaaa;
   float: left;
   padding: 16px 8px;
+  position: relative;
   min-height: 48px;
+}
+/* line 40, ../../src/sass/objects/_controls.scss */
+.controls__tabs__tabcontents .btn-drawing-clear {
+  float: right;
+  margin-top: 16px;
+  margin-right: 16px;
+}
+
+/* line 1, ../../src/sass/objects/_palette.scss */
+.palette {
+  border-style: solid;
+  border-width: 16px 8px;
+  -moz-border-image: url("../img/gray-1.gif") 16 8 round;
+  -webkit-border-image: url("../img/gray-1.gif") 16 8 round;
+  -o-border-image: url("../img/gray-1.gif") 16 8 round;
+  border-image: url("../img/gray-1.gif") 16 8 round;
+  display: block;
+  float: left;
+}
+/* line 7, ../../src/sass/objects/_palette.scss */
+.palette li {
+  display: block;
+  float: left;
+  text-align: center;
+  white-space: pre-wrap;
+}
+/* line 12, ../../src/sass/objects/_palette.scss */
+.palette li.active {
+  background-color: #aa0000;
+  color: #fff;
 }

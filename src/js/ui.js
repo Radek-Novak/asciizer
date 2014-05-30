@@ -22,6 +22,20 @@ $('.recalc').click(function() {
 
 $('.js-drawing-clear').click(drawing.clear);
 
+$('.palette li').click(function (event) {
+    var $this = $(this),
+        coordX = event.pageX - $this.parent().offset().left,
+        charIndex = Math.floor((coordX / 8));
+
+    $this
+        .siblings('li')
+            .removeClass('active')
+            .end()
+        .addClass('active');
+        
+    drawing.changeChar($this.text());
+});
+
 $('.plus, .minus').click(function() {
     var $this = $(this),
         plus = $this.hasClass('plus'),
