@@ -183,7 +183,9 @@ function Drawing (sel, paramChar) {
 	"use strict";
 
 	var $drawing = $(sel).find('pre'),
-
+		
+		docbody = $(sel),
+		mouseDown = false,
 		mouseMoveHandle, 
 		mouseDownHandle,
 		mouseClickHandle,
@@ -206,6 +208,12 @@ function Drawing (sel, paramChar) {
 					}
 				};
 			};
+			
+	this.clear = function () {
+		var w = $drawing.html().length;
+
+		$drawing.text( new Array(w + 1).join(' '));
+	};
 
 	this.attachHandles = function () {
 		mouseMoveHandle = null;
@@ -217,28 +225,26 @@ function Drawing (sel, paramChar) {
 	};
 
 	this.changeChar = function (c) {
-		char = c;
+		char = c || ' ';
 		this.attachHandles();
 	};
 
 	// init 
 	this.changeChar(paramChar);
 
+	docbody.mouseup(function () {
+		mouseDown = false;
+	});
+	docbody.mouseleave(function () {
+		mouseDown = false;
+	});
+	docbody.mousedown(function () {
+		mouseDown = true;
+	});
 }
 
-var mouseDown = false,
-	docbody = document.body;
 
-docbody.onmousedown = function() { 
-  mouseDown = true;
-};
-
-docbody.onmouseup = docbody.onmouseleave =function() {
-  mouseDown = false;
-};
-
-
-drawing = new Drawing('.box__subbox--drawing', '*');
+drawing = new Drawing('.box__subbox--drawing');
 
 var DropHandler = {
 	$dropzone: null,
@@ -333,6 +339,8 @@ function getGridWidth() {
 $('.recalc').click(function() {
     last.calculate(getGridWidth());
 });
+
+$('.js-drawing-clear').click(drawing.clear);
 
 $('.plus, .minus').click(function() {
     var $this = $(this),

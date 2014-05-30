@@ -20,6 +20,8 @@ $('.recalc').click(function() {
     last.calculate(getGridWidth());
 });
 
+$('.js-drawing-clear').click(drawing.clear);
+
 $('.plus, .minus').click(function() {
     var $this = $(this),
         plus = $this.hasClass('plus'),
