@@ -8,11 +8,13 @@
 }
 
 %box {
-    background-color: $teal;
     box-shadow: 2*$charw $charh 0 0 rgba(0, 0, 0, 0.5);
     cursor: move;
     display: inline-block;
     padding: 0 8px;
+    > * {
+        cursor: default;
+    }
 }
 %box__subbox {
 }
@@ -34,7 +36,6 @@
         @extend %no-select;
 
         display: block;
-        cursor: default;
         height: 16px;
         overflow: hidden;
         position: relative;
@@ -50,6 +51,5 @@
 .box__subbox--controls {
     @extend %no-select;
     
-    line-height: $charh;
-    padding: $charh $charw;
+    margin: $charh $charw;
 }

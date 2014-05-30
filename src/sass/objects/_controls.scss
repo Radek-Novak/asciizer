@@ -1,0 +1,35 @@
+$tab-default-bg: transparent;
+$tab-default-front: black;
+$tab-active-bg: $lightGray;
+
+
+$tab-content-bg: $tab-active-bg;
+
+$tabs-width: 80px;
+$tabs-number: 3;
+
+.controls__tabs {
+	@extend %clearfix;
+}
+
+.controls__tabs__tablinks {
+	float: left;
+
+	li {
+		display: block;
+		padding: 0 2*$charw 0 $charw;
+		width: $tabs-width;
+
+		&.ui-state-active {
+			background-color: $tab-active-bg;
+		}
+	}
+}
+.controls__tabs__tabcontents {
+	@include experimental-value(width, "calc(100% - #{$tabs-width})");
+
+	background-color: $tab-content-bg;
+	float: left;
+    padding: $charh $charw;
+	min-height: $tabs-number * $charh;
+}

@@ -58,20 +58,38 @@
         </div>
 
         <div class="box__subbox--controls">
-
-            <div class="resize">
-                <div class="indicator">
-                    <span class="width">54</span>
-                    <span class="sep">x</span>
-                    <span class="height">33</span>
-                    <button class="recalc">Recalculate</button>
+            <div class="controls">
+                <div class="controls__tabs js-controls-tabs">
+                    <ul class="controls__tabs__tablinks">
+                        <li><a href="#tab-draw">Draw</a>
+                        </li>
+                        <li><a href="#tab-convert">Convert</a>
+                        </li>
+                        <li><a href="#tab-setup">Setup</a>
+                        </li>
+                    </ul>
+                    <div class="controls__tabs__tabcontents">
+                        <div id="tab-draw">
+    
+                        </div>
+                        <div id="tab-convert">
+                            <input type="checkbox" class="preview" id="preview">
+                            <label class="checkboxlabel" for="preview">show original</label>
+                            <button class="recalc">Recalculate</button>
+                        </div>
+                        <div id="tab-setup">
+                            <div class="controls__resize">
+                                <div class="controls__indicator">
+                                    <span class="width">54</span>
+                                    <span class="sep">x</span>
+                                    <span class="height">33</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <input type="checkbox" class="preview" id="preview">
-            <label class="checkboxlabel" for="preview">show original</label>
         </div>
-
     </div>
 
     <canvas id="atelier"></canvas>

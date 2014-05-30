@@ -37,11 +37,13 @@ $('.plus, .minus').click(function() {
 $(".draggable").draggable({
     grid: [char_size.w, char_size.h],
     containment: "parent",
-    cancel: '.box__subbox--drawing',
+    cancel: '.box__subbox--drawing, .controls',
     stack: ".draggable"
 });
 
-$(".resizable").resizable({
+$('.js-controls-tabs').tabs();
+
+/*$(".resizable").resizable({
     grid: [char_size.w, char_size.h],
 
     resize: function(event, ui) {
@@ -113,3 +115,4 @@ $(".resizable").resizable({
         $text.text(lines.join('\n'));
     }
 });
+*/
