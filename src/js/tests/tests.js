@@ -1,19 +1,26 @@
 var el_testImages = document.querySelectorAll('.test-images img'),
 
     testImages = {
-        white: $('[src$="white.jpg"]')[0],
-        black: $('[src$="black.jpg"]')[0],
-        diag: $('[src$="diag.jpg"]')[0],
-        kruhyV: $('[src$="kruhyV.jpg"]')[0],
-        zlovule: $('[src$="Zlovůle.jpg"]')[0],
-        arrdown: $('[src$="arrowDown.png"]')[0]
+        arrowDown: $('[src$="arrowDown.png"]')[0],
+        jupiter:   $('[src$="jupiter.jpg"]')[0],
+        n:         $('[src$="n.jpg"]')[0],
+        black:     $('[src$="black.jpg"]')[0],
+        diag:      $('[src$="diag.jpg"]')[0],
+        half:      $('[src$="half.jpg"]')[0],
+        kruhyH:    $('[src$="kruhyH.jpg"]')[0],
+        psychot:   $('[src$="psychoterapie.png"]')[0],
+        white:     $('[src$="white.jpg"]')[0],
+        brt:       $('[src$="brt.svg"]')[0],
+        kruhyV:    $('[src$="kruhyV.jpg"]')[0],
+        corner:    $('[src$="corner-test.png"]')[0],
+        part:      $('[src$="part-transparent.png"]')[0]
     },
 
     asciizerObject = new Asciizer(el_testImages[0]),
     canvas = $('#atelier')[0],
     ctx = canvas.getContext('2d'),
-    currentTestImage = 'arrdown',
-    currentCanvasW = 80;
+    currentTestImage = 'kruhyV'
+,    currentCanvasW = 160;
 
 $('title').append(' | picture: ' + currentTestImage + ' | char width: ' + currentCanvasW);
 
@@ -138,7 +145,7 @@ test("Checking char array's integrity", function() {
 		if (!itsok) {
 			problems.push(i);
 		}
-	};
+	}
 	ok(itsok, "Checking if every char value is a number. Problems: " + problems.join(','));
 
 });
@@ -160,9 +167,9 @@ test("Analysing char values", function() {
     	var cur = ascObj.analysis[prop];
     	ok(!isNaN(cur) && cur >= 0, "Property "+prop+" should be a number over zero. Value: "+cur);
     	if (prop != 'sum') {
-    		ok (!isNaN(cur) && cur <= 765, "Property "+prop+" should be a number less than 765. Value: "+cur)
+    		ok (!isNaN(cur) && cur <= 765, "Property "+prop+" should be a number less than 765. Value: "+cur);
     	} else {
-    		ok (!isNaN(cur) && cur <= ascObj.charValues.length * 765, "Property sum should be less than charValues * 765. Value: "+cur)
+    		ok (!isNaN(cur) && cur <= ascObj.charValues.length * 765, "Property sum should be less than charValues * 765. Value: "+cur);
     	}
     }
 
@@ -220,6 +227,26 @@ test("Splitting into lines", function () {
 	ok( diff < 2, "There's correct number of lines");
 	ok( itsok, "Lines have the same width");
 
-	ascObj.log();
+	//ascObj.log();
+
+});
+
+test("Single method running all others", function () {
+    "use strict";
+    
+    var ascObj1 = new Asciizer(), 
+        ascObj2 = new Asciizer(testImages[currentTestImage],currentCanvasW);
+
+    ascObj1.loadImage(testImages[currentTestImage]);
+    ascObj1.setCanvasSize(currentCanvasW);
+    ascObj1.draw();
+    ascObj1.readCanvas();
+    ascObj1.calculatePixels();
+    ascObj1.calculateCharValues();
+    ascObj1.analyze();
+    ascObj1.calcChars();
+    ascObj1.splitIntoLines();
+
+    deepEqual(ascObj1.result(), ascObj2.start(), "Results are equal");
 
 });

@@ -24,6 +24,6 @@ a {
     color: inherit;
     text-decoration: none;
 }
-a:focus {
-    outline: none;
+*:focus {
+    outline: none !important;
 }

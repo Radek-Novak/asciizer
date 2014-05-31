@@ -5,7 +5,7 @@ var DropHandler = {
 	dropped: false,
 
 	init: function () {
-		this.$dropzone = $('.drawing');
+		this.$dropzone = $('.box__subbox--drawing');
 
 		this.$dropzone.on('dragenter', this.dragenter.bind(this));
 		this.$dropzone.on('dragover', this.dragover.bind(this));
@@ -57,6 +57,11 @@ function handleFiles(files) {
 		imgObj.onload = function() {
 
 			last = new Asciizer(this, getGridWidth());
+			
+			var asciized = last.start().split('\n');
+			for (var i = 0, ii = asciized.length; i < ii; i++) {
+				
+			}
 		};
 
 		imgObj.src = reader.result;

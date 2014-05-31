@@ -33,7 +33,7 @@ module.exports = function(grunt) {
         },
         jsdoc: {
             dist: {
-                src: ['js/Asciizer.js'],
+                src: ['src/js/Asciizer.js'],
                 options: {
                     destination: 'docs/'
                 }

@@ -13,7 +13,7 @@ $('.controls input.preview').on("click", function() {
 });
 
 function getGridWidth() {
-    return parseInt($('.indicator .width').text(), 10);
+    return $('pre')[0].innerText.length;
 }
 
 $('.recalc').click(function() {
@@ -32,7 +32,7 @@ $('.palette li').click(function (event) {
             .removeClass('active')
             .end()
         .addClass('active');
-        
+
     drawing.changeChar($this.text());
 });
 
