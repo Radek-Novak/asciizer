@@ -195,8 +195,6 @@ Asciizer.prototype.log = function () {
  * @returns content
  */
 Asciizer.prototype.start = function () {
-    //this.loadImage();
-    //this.setCanvasSize();
     this.draw();
     this.readCanvas();
     this.calculatePixels();

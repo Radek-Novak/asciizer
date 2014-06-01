@@ -1,13 +1,16 @@
 function Drawing (sel, paramChar) {
 	"use strict";
 
-	var $drawing = $(sel).find('pre'),
+	var $thisEl = $(sel),
+		$drawing = $thisEl.find('pre'),
 		
-		docbody = $(sel),
 		mouseDown = false,
 		mouseMoveHandle, 
 		mouseDownHandle,
 		mouseClickHandle,
+
+		curH,
+		curW,
 
 		char,
 
@@ -33,6 +36,35 @@ function Drawing (sel, paramChar) {
 
 		$drawing.text( new Array(w + 1).join(' '));
 	};
+	
+	this.refreshWidth = function () {
+		curW = $thisEl.find('pre:nth-child(1)').text().length;
+	};
+
+	this.refreshHeight = function () {
+		curH = $thisEl.find('pre').length;
+	};
+
+	this.changeHeight = function (newH) {
+		var	diff, 
+			pre; 
+
+		this.refreshHeight();
+		this.refreshWidth();
+
+		if (curH === newH) {
+			// do nothing
+		} else if (curH > newH) {
+			$thisEl.find('pre').slice(newH).remove();
+
+		} else {
+			pre = '<pre>'+ new Array(curW + 1).join(' ') + '</pre>';
+			diff = newH - curH;
+			var toAppend = new Array(diff + 1).join(pre);
+
+			$thisEl.append(toAppend);
+		}
+	};
 
 	this.attachHandles = function () {
 		mouseMoveHandle = null;
@@ -51,13 +83,13 @@ function Drawing (sel, paramChar) {
 	// init 
 	this.changeChar(paramChar);
 
-	docbody.mouseup(function () {
+	$thisEl.mouseup(function () {
 		mouseDown = false;
 	});
-	docbody.mouseleave(function () {
+	$thisEl.mouseleave(function () {
 		mouseDown = false;
 	});
-	docbody.mousedown(function () {
+	$thisEl.mousedown(function () {
 		mouseDown = true;
 	});
 }
