@@ -33,7 +33,7 @@ function Drawing (sel, paramChar) {
 			
 	this.clear = function () {
 		var w = $drawing.html().length;
-
+		$drawing = $thisEl.find('pre');
 		$drawing.text( new Array(w + 1).join(' '));
 	};
 	
@@ -65,8 +65,15 @@ function Drawing (sel, paramChar) {
 			$thisEl.append(toAppend);
 		}
 	};
+	this.insert = function (ins) {
+		$drawing.remove();
 
+		for (var i = 0, ii = ins.length; i < ii; i++) {
+			$thisEl.append('<pre>' + ins[i] + '</pre>');
+		}
+	};
 	this.attachHandles = function () {
+		$drawing = $thisEl.find('pre');
 		mouseMoveHandle = null;
 		mouseDownHandle = null;
 		mouseClickHandle = null;

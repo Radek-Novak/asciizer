@@ -7,7 +7,11 @@
 function Asciizer(imgObj, gridWidth) {
     "use strict";
 
-    this.canvas = $('#atelier')[0];
+    this.canvas = $('<canvas></canvas>')
+                    .appendTo('body')
+                    .attr('id','atelier' + new Date().getTime())
+                    .hide()[0];
+
     this.chars = " .-:*+=%#@".split("").reverse().join("");
     this.context = this.canvas.getContext('2d');
     this.image = imgObj;
@@ -27,9 +31,13 @@ function Asciizer(imgObj, gridWidth) {
 
     this.lines = [];
 
-
-
-
+    // initialization 
+    if (imgObj) {
+        this.loadImage(imgObj);
+    }
+    if (gridWidth) {
+        this.setCanvasSize(gridWidth);
+    }
 }
 Asciizer.prototype.loadImage = function (i) {
     "use strict";
@@ -40,10 +48,10 @@ Asciizer.prototype.setCanvasSize = function (w, h) {
     "use strict";
     var ratio = this.image.width / w;
     
-    this.grid_w = w;
+    this.grid_w = w || gridWidth;
     this.grid_h = h || (this.image.height / ratio);
 
-    this.canvas.width = w;
+    this.canvas.width = this.grid_w;
     this.canvas.height = this.grid_h;
 };
 
@@ -195,6 +203,8 @@ Asciizer.prototype.log = function () {
  * @returns content
  */
 Asciizer.prototype.start = function () {
+    //this.loadImage();
+    //this.setCanvasSize();
     this.draw();
     this.readCanvas();
     this.calculatePixels();
@@ -240,7 +250,7 @@ function Drawing (sel, paramChar) {
 			
 	this.clear = function () {
 		var w = $drawing.html().length;
-
+		$drawing = $thisEl.find('pre');
 		$drawing.text( new Array(w + 1).join(' '));
 	};
 	
@@ -272,8 +282,15 @@ function Drawing (sel, paramChar) {
 			$thisEl.append(toAppend);
 		}
 	};
+	this.insert = function (ins) {
+		$drawing.remove();
 
+		for (var i = 0, ii = ins.length; i < ii; i++) {
+			$thisEl.append('<pre>' + ins[i] + '</pre>');
+		}
+	};
 	this.attachHandles = function () {
+		$drawing = $thisEl.find('pre');
 		mouseMoveHandle = null;
 		mouseDownHandle = null;
 		mouseClickHandle = null;
@@ -333,7 +350,6 @@ var DropHandler = {
 		e.stopPropagation();
 		e.preventDefault();
 		this.$dropzone.css({'opacity': 0.1});
-		console.log(this);
 	},
 	dragleave: function (e) {
 		e.stopPropagation();
@@ -369,16 +385,17 @@ function handleFiles(files) {
 		imgObj.onload = function() {
 
 			last = new Asciizer(this, getGridWidth());
+			var asciized = last.start();
 			
-			var asciized = last.start().split('\n');
-			for (var i = 0, ii = asciized.length; i < ii; i++) {
-				
-			}
+			//console.log(last);
+
+			drawing.insert(asciized.split('\n'));
+			drawing.attachHandles();
 		};
 
 		imgObj.src = reader.result;
 		imgObj.alt = "current picture";
-		$('.original-image').empty().append(imgObj);
+		//$('.original-image').empty().append(imgObj);
 	};
 
 	reader.readAsDataURL(file);
@@ -392,9 +409,9 @@ var char_size = {
     h: 16
 };
 
-$('.controls input.preview').on("click", function() {
-    var orig = $('.original-image'),
-        drawing = $('.drawing'),
+$('.js-preview-toggle').on("click", function() {
+    var orig = $('.box__subbox--original'),
+        drawing = $('.box__subbox--drawing'),
         label = $('[for="preview"]');
 
     drawing.fadeToggle(0);

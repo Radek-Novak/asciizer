@@ -21,7 +21,6 @@ var DropHandler = {
 		e.stopPropagation();
 		e.preventDefault();
 		this.$dropzone.css({'opacity': 0.1});
-		console.log(this);
 	},
 	dragleave: function (e) {
 		e.stopPropagation();
@@ -57,16 +56,17 @@ function handleFiles(files) {
 		imgObj.onload = function() {
 
 			last = new Asciizer(this, getGridWidth());
+			var asciized = last.start();
 			
-			var asciized = last.start().split('\n');
-			for (var i = 0, ii = asciized.length; i < ii; i++) {
-				
-			}
+			//console.log(last);
+
+			drawing.insert(asciized.split('\n'));
+			drawing.attachHandles();
 		};
 
 		imgObj.src = reader.result;
 		imgObj.alt = "current picture";
-		$('.original-image').empty().append(imgObj);
+		//$('.original-image').empty().append(imgObj);
 	};
 
 	reader.readAsDataURL(file);

@@ -3,9 +3,9 @@ var char_size = {
     h: 16
 };
 
-$('.controls input.preview').on("click", function() {
-    var orig = $('.original-image'),
-        drawing = $('.drawing'),
+$('.js-preview-toggle').on("click", function() {
+    var orig = $('.box__subbox--original'),
+        drawing = $('.box__subbox--drawing'),
         label = $('[for="preview"]');
 
     drawing.fadeToggle(0);

@@ -72,3 +72,12 @@ test('Resize: multiple', function () {
 		console.log(actualH);
 	}
 });
+
+test('Inserting', function () {
+	var drawing = new Drawing('.test-drawing'),
+		ins = ['aaaaa', 'bbbbb', 'ccccc', 'ddddd', 'eeeee'];
+
+	drawing.insert(ins);
+
+	equal($('.test-drawing pre').text(), ins.join(''), 'Inserted matches');
+});

@@ -16,38 +16,22 @@ var el_testImages = document.querySelectorAll('.test-images img'),
         part:      $('[src$="part-transparent.png"]')[0]
     },
 
-    asciizerObject = new Asciizer(el_testImages[0]),
+/*    asciizerObject = new Asciizer(el_testImages[0]),
     canvas = $('#atelier')[0],
-    ctx = canvas.getContext('2d'),
-    currentTestImage = 'kruhyV'
-,    currentCanvasW = 160;
+    ctx = canvas.getContext('2d'),*/
+    currentTestImage = 'n',
+    currentCanvasW = 120;
 
 $('title').append(' | picture: ' + currentTestImage + ' | char width: ' + currentCanvasW);
 
 
 test("Calculating and setting canvas dimensions", function() {
-    var ascObj = new Asciizer(testImages.black),
-        cnvS, imgW, imgH, ratio;
+    var ascObj = new Asciizer(testImages.black, currentCanvasW);
 
-    function getCanvasSize(sel) {
-        var c = $(sel)[0] || $('#atelier')[0];
+    equal(ascObj.canvas.width, currentCanvasW,'Setting canvas width in constructor');
 
-        return {
-            w: c.width,
-            h: c.height
-        };
-    }
-    ascObj.setCanvasSize(currentCanvasW);
-
-    imgW = ascObj.image.width;
-    imgH = ascObj.image.height;
-    ratio = imgW / currentCanvasW;
-
-    // check
-    cnvS = getCanvasSize();
-    ok(cnvS.w === currentCanvasW && cnvS.h === (imgH / ratio), "Canvas dimensions: " + cnvS.w +'x'+ cnvS.h);
-    ok(ascObj.grid_w === currentCanvasW && ascObj.grid_h === (imgH / ratio), "Chargrid dimensions: " + ascObj.grid_w +'x'+ ascObj.grid_h);
-
+    ascObj.setCanvasSize(137);
+    equal(ascObj.canvas.width, 137,'Re-setting canvas width');    
 });
 
 
