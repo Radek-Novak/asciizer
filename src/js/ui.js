@@ -39,13 +39,27 @@ $('.palette li').click(function (event) {
 $('.plus, .minus').click(function() {
     var $this = $(this),
         plus = $this.hasClass('plus'),
-        $input = $this.siblings('.input-number'),
-        value = parseInt($input.val(), 10);
+        $indicator = $this.siblings('.indicator'),
+        value = parseInt($indicator.text(), 10),
+        chWidth = $this.parent().hasClass('controls__resize__width');
 
-    if (plus) {
-        $input.val(value + 1);
-    } else if (value > 1 && !plus) {
-        $input.val(value - 1);
+    if (chWidth) {
+        if (plus) {
+            drawing.addWidth();
+        } else if (value > 1 && !plus) {
+            //$indicator.text(value - 1);
+            drawing.reduceWidth();
+        }
+        $indicator.text(drawing.getWidth());
+    } else {
+        if (plus) {
+            //$indicator.text(value + 1);
+            drawing.addHeight();
+        } else if (value > 1 && !plus) {
+            //$indicator.text(value - 1);
+            drawing.reduceHeight();
+        }
+        $indicator.text(drawing.getHeight());
     }
 });
 

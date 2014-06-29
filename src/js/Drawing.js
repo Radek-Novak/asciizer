@@ -44,15 +44,27 @@ function Drawing (sel, paramChar) {
 	this.refreshHeight = function () {
 		curH = $thisEl.find('pre').length;
 	};
-
+	this.getHeight = function () {
+		this.refreshHeight();
+		return curH;
+	};
+	this.getWidth = function () {
+		this.refreshWidth();
+		return curW;
+	};
+	this.refresh = function () {
+		this.refreshWidth();
+		this.refreshHeight();
+		$drawing = $thisEl.find('pre');
+	};
 	this.changeHeight = function (newH) {
 		var	diff, 
 			pre; 
 
-		this.refreshHeight();
 		this.refreshWidth();
+		this.refreshHeight();
 
-		if (curH === newH) {
+		if (curH === newH) { // TODO
 			// do nothing
 		} else if (curH > newH) {
 			$thisEl.find('pre').slice(newH).remove();
@@ -64,6 +76,28 @@ function Drawing (sel, paramChar) {
 
 			$thisEl.append(toAppend);
 		}
+	};
+	this.addWidth = function () {
+		this.refresh();
+		for (var i = 0, ii = curH; i < ii; i++) {
+			$($drawing[i]).text($($drawing[i]).text() + ' ');
+		}
+	};
+	this.reduceWidth = function () {
+		this.refresh();
+		$drawing.each(function () {
+			var $cur = $(this);
+			$cur.text($cur.text().substr(0,curW-1));
+		});
+	};
+	this.addHeight = function () {
+		this.refresh();
+		$thisEl.append($('<pre>'+ new Array(curW + 1).join(' ') + '</pre>'));
+		this.attachHandles();
+	};
+	this.reduceHeight = function () {
+		this.refresh();
+		$drawing.last().remove();
 	};
 	this.insert = function (ins) {
 		$drawing.remove();

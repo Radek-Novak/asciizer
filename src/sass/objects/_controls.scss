@@ -43,3 +43,13 @@ $tabs-number: 3;
 		margin-right: 2*$charw;
 	}
 }
+.controls__resize {
+	padding: $charh 0;
+
+	.indicator {
+		margin: 0 $charw 0 2*$charw;
+	}
+}
+.controls__resize__width {
+	margin-bottom: $charh;
+}

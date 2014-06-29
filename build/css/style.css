@@ -751,6 +751,20 @@ input {
   margin-right: 16px;
 }
 
+/* line 46, ../../src/sass/objects/_controls.scss */
+.controls__resize {
+  padding: 16px 0;
+}
+/* line 49, ../../src/sass/objects/_controls.scss */
+.controls__resize .indicator {
+  margin: 0 8px 0 16px;
+}
+
+/* line 53, ../../src/sass/objects/_controls.scss */
+.controls__resize__width {
+  margin-bottom: 16px;
+}
+
 /* line 1, ../../src/sass/objects/_palette.scss */
 .palette {
   border-style: solid;
