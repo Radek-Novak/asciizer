@@ -117,7 +117,7 @@ function Drawing (sel, paramChar) {
 	};
 
 	this.changeChar = function (c) {
-		char = c || ' ';
+		char = c || '*';
 		this.attachHandles();
 	};
 

@@ -47,16 +47,13 @@ $('.plus, .minus').click(function() {
         if (plus) {
             drawing.addWidth();
         } else if (value > 1 && !plus) {
-            //$indicator.text(value - 1);
             drawing.reduceWidth();
         }
         $indicator.text(drawing.getWidth());
     } else {
         if (plus) {
-            //$indicator.text(value + 1);
             drawing.addHeight();
         } else if (value > 1 && !plus) {
-            //$indicator.text(value - 1);
             drawing.reduceHeight();
         }
         $indicator.text(drawing.getHeight());
