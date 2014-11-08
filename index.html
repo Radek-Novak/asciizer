@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Asciizer</title>
+
+    <meta name="description" content="Asciizer creates ascii-art by converting images to characters">
+    <meta name="keywords" content="ascii, ascii-art, fixedsys">
+    <meta name="robots" content="index,follow">
+
+    <link rel="stylesheet" type="text/css" href="build/css/style.css">
+
+    <!--[if lt IE 9]>
+        <script src="./scripts/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="box--lightblue draggable ">
+        <div class="box__subbox--original"></div>
+        <div class="box__subbox--drawing" data-size="">
+            <pre>                                                     </pre>
+            <pre>                     - --... ..-                     </pre>
+            <pre>                     %%%+%*=:+:%.                    </pre>
+            <pre>                     %#%#%%%%=%=-                    </pre>
+            <pre>                     %####@#@#%=-                    </pre>
+            <pre>                     %=#%#%%*=:+                     </pre>
+            <pre>                     ==%==+:-*:*.                    </pre>
+            <pre>                     =#++::.  +*-                    </pre>
+            <pre>                     %=%*+-*-::=.                    </pre>
+            <pre>                     %+#%%%%+#==-                    </pre>
+            <pre>                     *%+#%#=#=%*.                    </pre>
+            <pre>                     ++=%%====++                     </pre>
+            <pre>                     %+=:+:*-*-%-                    </pre>
+            <pre>                     +=:*.:.-.+%-                    </pre>
+            <pre>                     **+%%#%#%##-                    </pre>
+            <pre>                     *-=*@#@#@#@:                    </pre>
+            <pre>                     +*--.:=%%=#-                    </pre>
+            <pre>                     ==:..**%=%=:                    </pre>
+            <pre>                     @%=-**%+%+#-                    </pre>
+            <pre>        . ..--:-:-::*##=+++=+==#+*:--:--. ..--       </pre>
+            <pre>        .*==%+%+%=#+#=%=%*=*+*=+#=%=#*%*=:=-.        </pre>
+            <pre>          :==%=%=%=%=%=%=%+=*=*==%=#=%==++:          </pre>
+            <pre>            :=%%%%%%%#%##@#@##=#=@=@#@%@+.           </pre>
+            <pre>              ::=*=+%=#%@#@%#=%*=+%%@#=.             </pre>
+            <pre>                .-::+=%%%%++:*::*+===-               </pre>
+            <pre>                 .:%=#+%++::.:.%*#*-                 </pre>
+            <pre>                   -=%%++-:.- :+=-                   </pre>
+            <pre>                     .====++**=:                     </pre>
+            <pre>                       -=#%@+*                       </pre>
+            <pre>                         *%*                         </pre>
+            <pre>                                                     </pre>
+            <pre>               Drag and drop a picture in            </pre>
+            <pre>                this window or use this:             </pre>
+            <pre>                                                     </pre>
+        </div>
+
+        <div class="box__subbox--controls">
+            <div class="controls">
+                <div class="controls__tabs js-controls-tabs">
+                    <ul class="controls__tabs__tablinks">
+                        <li><a href="#tab-draw">Draw</a>
+                        </li>
+                        <li><a href="#tab-convert">Convert</a>
+                        </li>
+                        <li><a href="#tab-setup">Setup</a>
+                        </li>
+                    </ul>
+                    <div class="controls__tabs__tabcontents">
+                        <div id="tab-draw">
+                            <ol class="palette">
+                                <li> </li>
+                                <li>.</li>
+                                <li>-</li>
+                                <li>:</li>
+                                <li class="active">*</li>
+                                <li>+</li>
+                                <li>=</li>
+                                <li>%</li>
+                                <li>#</li>
+                                <li>@</li>
+                            </ol>
+                            <button class="btn-drawing-clear js-drawing-clear">Clear</button>
+                        </div>
+                        <div id="tab-convert">
+                            <input type="checkbox" class="js-preview-toggle" id="preview">
+                            <label class="checkboxlabel" for="preview">show original</label>
+                            <button class="recalc">Recalculate</button>
+                        </div>
+                        <div id="tab-setup">
+                            <div class="controls__resize">
+                                <div class="controls__resize__width">
+                                    width:&nbsp;
+                                    <button class="plus">+</button>
+                                    <span class="indicator">54</span>
+                                    <button class="minus">-</button>
+                                </div>
+                                <div class="controls__resize__height">
+                                    height:
+                                    <button class="plus">+</button>
+                                    <span class="indicator">33</span>
+                                    <button class="minus">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <canvas id="atelier"></canvas> -->
+
+    <script src="src/js/vendor/jquery.js"></script>
+    <script src="src/js/vendor/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="build/js/main.js"></script>
+</body>
+
+</html>
