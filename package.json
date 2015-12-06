@@ -4,10 +4,11 @@
   "description": "convert an image file into characters",
   "main": "index.js",
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "babel index.js | node",
+    "test": "babel-tape-runner test/*.js"
   },
   "repository": {
     "type": "git",
@@ -16,10 +17,22 @@
   "keywords": [
     "ascii"
   ],
-  "author": "Radek Novak",
+  "author": "Radek Novak <radek.novak.cze@gmail.com> (http://radek-novak.com/)",
   "license": "GPL",
   "bugs": {
     "url": "https://github.com/Radek-Novak/asciizer/issues"
   },
-  "homepage": "https://github.com/Radek-Novak/asciizer"
+  "homepage": "https://github.com/Radek-Novak/asciizer",
+  "dependencies": {
+    "babel": "^6.3.13",
+    "babel-core": "^6.3.13",
+    "get-pixels": "^3.2.3",
+    "tape": "^4.2.2",
+    "yargs": "^3.31.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-tape": "0.0.7",
+    "tap-colorize": "^1.2.0"
+  }
 }
