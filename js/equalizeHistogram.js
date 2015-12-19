@@ -9,7 +9,7 @@
 * result is written to src (faster)
 * @return {Array} Destination image
 */
-equalizeHistogram = function(src, inMax, outMax) {
+const equalizeHistogram = function(src, inMax, outMax) {
     var srcLength = src.length;
     var dst = []
 
@@ -35,4 +35,4 @@ equalizeHistogram = function(src, inMax, outMax) {
     return dst;
 }
 
-exports.equalizeHistogram = equalizeHistogram
+module.exports = equalizeHistogram
