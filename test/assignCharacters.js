@@ -1,7 +1,7 @@
 "use strict"
 const test = require('tape')
-const assignCharacters = require('../js/assignCharacters.js')
-const equalizeHistogram = require('../js/equalizeHistogram')
+const assignCharacters = require('../js/core/assignCharacters.js')
+// const equalizeHistogram = require('../js/core/equalizeHistogram')
 
 test('assign characters', t => {
   const chars = " .-:*+=%#@"

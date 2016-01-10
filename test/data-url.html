@@ -1,0 +1,29 @@
+<!doctype html>
+<title>asdf</title>
+<canvas id="canvas"></canvas>
+<pre id="out"></pre>
+<script src="../dist/asciizer.min.js"></script>
+<script>
+
+var canvas = document.getElementById('canvas')
+var ctx = canvas.getContext('2d')
+ctx.fillStyle = '#fff';
+ctx.fillRect(0, 0, 99999,99999)
+ctx.fillStyle = '#000';
+ctx.beginPath();
+ctx.moveTo(25,25);
+ctx.lineTo(105,25);
+ctx.lineTo(25,105);
+ctx.fill();
+
+var dataURL = canvas.toDataURL('image/jpeg')
+
+console.log(dataURL);
+asciizer({
+    src: dataURL,
+    x: 40,
+  },
+  function (x) {
+    document.getElementById('out').innerHTML = x.join('<br>')
+  })
+</script>

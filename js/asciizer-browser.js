@@ -4,7 +4,7 @@ const equalizeHistogram = require('./equalizeHistogram')
 const assignCharacters = require('./assignCharacters')
 const readSums = require('./readSums')
 const getRows = require('./getRows')
-const getPixels = require('get-pixels')
+const getPixels = require('dom-pixels')
 
 // options {src, x, y, chars}
 const asciize = (options, cb) => {

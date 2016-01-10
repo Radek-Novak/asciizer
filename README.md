@@ -5,10 +5,11 @@ asciizer
 asciize an image
 
 
-example:
+examples:
 
 ```bash
-node index.js test/testimg/n.jpg -w 100
-node index.js test/testimg/n.jpg -h 100
-node index.js test/testimg/n.jpg -w 100 -h 66
+$ node index.js path/to/image.jpg -w 100 > output.txt
+$ node index.js path/to/image.jpg -h 100
+$ node index.js path/to/image.jpg -w 100 -h 66
+$ node index.js path/to/image.jpg -w 100 --chars abcdefghij
 ```

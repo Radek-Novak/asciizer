@@ -1,6 +1,6 @@
 "use strict"
 var test = require('tape')
-var equalize = require('../js/equalize')
+var equalize = require('../js/core/equalize')
 
 test('equalize values', function (t) {
   const t1 = equalize([3, 55, 88], 89, 9)
