@@ -1,0 +1,7 @@
+test
+.tern-project
+*.txt
+*.html
+node_modules
+.eslintrc
+.idea

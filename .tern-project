@@ -1,0 +1,22 @@
+{
+  "libs": [
+    "browser",
+    "jquery",
+    "underscore"
+  ],
+  "exclude": ["wordpress/**",
+              "node_modules/**",
+              "bower_components/**"
+              ],
+
+  "loadEagerly": [
+    "js/**/*.js"
+  ],
+  "plugins": {
+    "complete_strings": {},
+    "lint": {},
+    "doc_comment": {
+     "fullDocs": true
+    }
+  }
+}
